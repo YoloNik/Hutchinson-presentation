@@ -7,15 +7,18 @@ import { tokens } from '../../theme';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
-import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
+import LinearScaleIcon from '@mui/icons-material/LinearScale';
+import Grid4x4Icon from '@mui/icons-material/Grid4x4';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutlined';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
+import ViewTimelineIcon from '@mui/icons-material/ViewTimeline';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-//import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
+import RadarIcon from '@mui/icons-material/Radar';
+
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -94,10 +97,10 @@ const Sidebar = () => {
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
                 <img
-                  alt="profile-user"
+                  alt="Logo"
                   width="100px"
                   height="100px"
-                  src={`../../assets/user.png`}
+                  src={`../../assets/hutchinson.png`}
                   style={{ cursor: 'pointer', borderRadius: '50%' }}
                 />
               </Box>
@@ -141,9 +144,16 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Contacts Information"
+              title="Information"
               to="/contacts"
               icon={<ContactsOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+						<Item
+              title="Dimensions"
+              to="/dimensions"
+              icon={<LinearScaleIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -202,6 +212,27 @@ const Sidebar = () => {
               title="Line Chart"
               to="/line"
               icon={<TimelineOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Heat Map"
+              to="/heatmap"
+              icon={<Grid4x4Icon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Time Range"
+              to="/timerange"
+              icon={<ViewTimelineIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Radar"
+              to="/radar"
+              icon={<RadarIcon />}
               selected={selected}
               setSelected={setSelected}
             />
