@@ -18,7 +18,7 @@ const FAQ = () => {
         subtitle="Frequently Problems and Issue"
       />
 
-      <Accordion defaultExpanded>
+      <Accordion >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography color={colors.greenAccent[500]} variant="h5">
             <ProblemsBox header="Equipment failure" priority="Critical" />
@@ -28,6 +28,144 @@ const FAQ = () => {
           <Typography>
             <ProblemsBox body="Broken part and dysfunctional electronic component." />
           </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Lider Name" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="District" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Work Place" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <img  src={`../assets/hutchinson.png`} alt="img"/>
+        </AccordionDetails>
+      </Accordion>
+			<Accordion >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography color={colors.greenAccent[500]} variant="h5">
+            <ProblemsBox header="Equipment failure" priority="Critical" />
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Broken part and dysfunctional electronic component." />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Lider Name" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="District" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Work Place" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <img  src={`../assets/hutchinson.png`} alt="img"/>
+        </AccordionDetails>
+      </Accordion>
+			<Accordion >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography color={colors.greenAccent[500]} variant="h5">
+            <ProblemsBox header="Equipment failure" priority="Critical" />
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Broken part and dysfunctional electronic component." />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Lider Name" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="District" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Work Place" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <img  src={`../assets/hutchinson.png`} alt="img"/>
+        </AccordionDetails>
+      </Accordion>
+			<Accordion >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography color={colors.greenAccent[500]} variant="h5">
+            <ProblemsBox header="Equipment failure" priority="Critical" />
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Broken part and dysfunctional electronic component." />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Lider Name" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="District" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Work Place" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <img  src={`../assets/hutchinson.png`} alt="img"/>
+        </AccordionDetails>
+      </Accordion>
+			<Accordion >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography color={colors.greenAccent[500]} variant="h5">
+            <ProblemsBox header="Equipment failure" priority="Critical" />
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Broken part and dysfunctional electronic component." />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Lider Name" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="District" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography>
+            <ProblemsBox body="Work Place" />
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <img  src={`../assets/hutchinson.png`} alt="img"/>
         </AccordionDetails>
       </Accordion>
     </Box>

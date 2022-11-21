@@ -43,6 +43,7 @@ export default function Dimensions() {
 
 }
 
+
 const dimData= useMemo(()=> { return [
 		{
 			id: 'data',
@@ -95,7 +96,7 @@ React.useEffect(() => {
 		y:15 ,
 	}
 
-	 
+	 console.log('first', `first`)
 
 	dimData.forEach(el => {
 		switch (el.id) {
@@ -124,9 +125,6 @@ React.useEffect(() => {
 				break;
 		}
 });
-
-	
-	
 
 	
 }, [dimData, size, step])
@@ -185,10 +183,10 @@ React.useEffect(() => {
 							<FormControl sx={{ m: 1, minWidth: 120, gridColumn: 'span 2' }}>
                 <InputLabel htmlFor="grouped-select">Dimensions</InputLabel>
                 <Select defaultValue="" id="grouped-select" label="Dimensions">
-                  <MenuItem value={1}>Data</MenuItem>
-                  <MenuItem value={2}>Data</MenuItem>
-                  <MenuItem value={3}>Data</MenuItem>
-                  <MenuItem value={4}>Data</MenuItem>
+                  <MenuItem value={1}>From 'x' to 'y' </MenuItem>
+                  <MenuItem value={2}>From 'a' to 'b'</MenuItem>
+                  <MenuItem value={3}>From 'x' to 'i'</MenuItem>
+                  <MenuItem value={4}>From 'n' to 'y'</MenuItem>
                 </Select>
               </FormControl>
 
@@ -303,7 +301,7 @@ React.useEffect(() => {
         legendPosition: 'middle',
       }}
       colors={{ scheme: 'category10' }}
-			lineWidth={1}
+			lineWidth={5}
       pointSize={10}
       enableSlices="x"
       //enableArea={true}
