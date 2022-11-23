@@ -18,7 +18,7 @@ import Header from '../../components/Header';
 import FileUploader from '../../components/FileUploader';
 import { useState, useEffect } from 'react';
 import { tokens } from '../../theme';
-import { Image } from '@mui/icons-material';
+
 
 
 const Form = () => {
@@ -237,11 +237,13 @@ switch (e.target?.name) {
 								{header && <Typography color={colors.greenAccent[500]}> Header : {header}</Typography> }
 								{priority && <Typography color={colors.greenAccent[500]}> Priority : {priority}</Typography> }
 								{description && <Typography> Description : {description}</Typography> }
+								<div>
 								{firstName && <Typography> FirstName : {firstName}</Typography> }
 								{lastName && <Typography> LastName : {lastName}</Typography> }
 								{district && <Typography> District : {district}</Typography> }
 								{place && <Typography> Work Place : {place}</Typography> }
 								{file && <img src={file.webkitRelativePath} alt='file'/>}
+								</div>
 						</Card>
 				</Box>
 				}
