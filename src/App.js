@@ -1,52 +1,32 @@
-import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Topbar from './scenes/global/Topbar';
-import Sidebar from './scenes/global/Sidebar';
-import Dashboard from './scenes/dashboard';
-import Team from './scenes/team';
-import Contacts from './scenes/contacts';
-import Bar from './scenes/bar';
-import Form from './scenes/form';
-import Line from './scenes/line';
-import Pie from './scenes/pie';
-import FAQ from './scenes/faq';
-import Dimensions from './scenes/dimensions';
-import HeatMap from './scenes/heatMap';
-import TimeRange from './scenes/timeRange';
-import Radar from './scenes/radar';
+import { useEffect } from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { ColorModeContext, useMode } from './theme';
-import Calendar from './scenes/calendar/calendar';
+import { Provider } from 'react-redux';
+//import { authOperations, authSelector } from './redux/auth';
+import { ToastContainer } from 'react-toastify';
+import { store } from './redux/store';
+
+import Main from './scenes/global/Main';
+//import Home from './scenes/home/Home';
+//import NoAuthMain from './scenes/global/NoAuthMain';
+import fbStart from './fbStart';
 
 function App() {
   const [theme, colorMode] = useMode();
-  const [isSidebar, setIsSidebar] = useState(true);
+  //const token = store.getState().auth.idToken;
+
+  useEffect(() => {
+    fbStart();
+  }, []);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="app">
-          <Sidebar isSidebar={isSidebar} />
-          <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/contacts" element={<Contacts />} />
-              <Route path="/dimensions" element={<Dimensions />} />
-              <Route path="/form" element={<Form />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/heatmap" element={<HeatMap />} />
-              <Route path="/timerange" element={<TimeRange />} />
-              <Route path="/radar" element={<Radar />} />
-            </Routes>
-          </main>
-        </div>
+        <Provider store={store}>
+          <ToastContainer autoClose={3000} />
+          <Main />
+        </Provider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

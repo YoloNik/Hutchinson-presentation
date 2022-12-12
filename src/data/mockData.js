@@ -218,42 +218,318 @@ export const mockTransactions = [
   },
 ];
 
-export const mockBarData = [
+//------------------------------------------------------------------------------------------------------
+export const mockBarDataYear = [
   {
     district: 'Q3',
-    'FD LH': 285,
+    'FD LH': 216000,
     'FD LH color': 'hsl(192, 70%, 50%)',
-    'FD RH': 272,
+    'FD RH': 215000,
     'FD RH color': 'hsl(334, 70%, 50%)',
-    'RD LH': 289,
+    'RD LH': 216150,
     'RD LH color': 'hsl(295, 70%, 50%)',
-    'RD RH': 300,
+    'RD RH': 216500,
     'RD RH color': 'hsl(351, 70%, 50%)',
   },
   {
     district: 'Q4',
-    'FD LH': 267,
+    'FD LH': 215980,
     'FD LH color': 'hsl(192, 70%, 50%)',
-    'FD RH': 255,
+    'FD RH': 215980,
     'FD RH color': 'hsl(334, 70%, 50%)',
-    'RD LH': 300,
+    'RD LH': 217100,
     'RD LH color': 'hsl(295, 70%, 50%)',
-    'RD RH': 300,
+    'RD RH': 214999,
     'RD RH color': 'hsl(351, 70%, 50%)',
   },
   {
     district: 'C-BEV',
-    'FD LH': 125,
+    'FD LH': 33600,
     'FD LH color': 'hsl(192, 70%, 50%)',
-    'FD RH': 176,
+    'FD RH': 33590,
     'FD RH color': 'hsl(334, 70%, 50%)',
-    'RD LH': 115,
+    'RD LH': 33000,
     'RD LH color': 'hsl(295, 70%, 50%)',
-    'RD RH': 131,
+    'RD RH': 34000,
     'RD RH color': 'hsl(351, 70%, 50%)',
   },
 ];
-
+export const mockBarDataMonth = [
+  {
+    district: 'Q3',
+    'FD LH': 18200,
+    'FD LH color': 'hsl(192, 70%, 50%)',
+    'FD RH': 18100,
+    'FD RH color': 'hsl(334, 70%, 50%)',
+    'RD LH': 18110,
+    'RD LH color': 'hsl(295, 70%, 50%)',
+    'RD RH': 18985,
+    'RD RH color': 'hsl(351, 70%, 50%)',
+  },
+  {
+    district: 'Q4',
+    'FD LH': 18180,
+    'FD LH color': 'hsl(192, 70%, 50%)',
+    'FD RH': 17950,
+    'FD RH color': 'hsl(334, 70%, 50%)',
+    'RD LH': 17990,
+    'RD LH color': 'hsl(295, 70%, 50%)',
+    'RD RH': 18500,
+    'RD RH color': 'hsl(351, 70%, 50%)',
+  },
+  {
+    district: 'C-BEV',
+    'FD LH': 2880,
+    'FD LH color': 'hsl(192, 70%, 50%)',
+    'FD RH': 2850,
+    'FD RH color': 'hsl(334, 70%, 50%)',
+    'RD LH': 2800,
+    'RD LH color': 'hsl(295, 70%, 50%)',
+    'RD RH': 2810,
+    'RD RH color': 'hsl(351, 70%, 50%)',
+  },
+];
+export const mockBarDataWeek = [
+  {
+    district: 'Q3',
+    'FD LH': 4500,
+    'FD LH color': 'hsl(192, 70%, 50%)',
+    'FD RH': 4600,
+    'FD RH color': 'hsl(334, 70%, 50%)',
+    'RD LH': 4500,
+    'RD LH color': 'hsl(295, 70%, 50%)',
+    'RD RH': 4550,
+    'RD RH color': 'hsl(351, 70%, 50%)',
+  },
+  {
+    district: 'Q4',
+    'FD LH': 4600,
+    'FD LH color': 'hsl(192, 70%, 50%)',
+    'FD RH': 4400,
+    'FD RH color': 'hsl(334, 70%, 50%)',
+    'RD LH': 4650,
+    'RD LH color': 'hsl(295, 70%, 50%)',
+    'RD RH': 4250,
+    'RD RH color': 'hsl(351, 70%, 50%)',
+  },
+  {
+    district: 'C-BEV',
+    'FD LH': 720,
+    'FD LH color': 'hsl(192, 70%, 50%)',
+    'FD RH': 710,
+    'FD RH color': 'hsl(334, 70%, 50%)',
+    'RD LH': 770,
+    'RD LH color': 'hsl(295, 70%, 50%)',
+    'RD RH': 650,
+    'RD RH color': 'hsl(351, 70%, 50%)',
+  },
+];
+export const mockBarDataDay = [
+  {
+    district: 'Q3',
+    'FD LH': 900,
+    'FD LH color': 'hsl(192, 70%, 50%)',
+    'FD RH': 920,
+    'FD RH color': 'hsl(334, 70%, 50%)',
+    'RD LH': 850,
+    'RD LH color': 'hsl(295, 70%, 50%)',
+    'RD RH': 790,
+    'RD RH color': 'hsl(351, 70%, 50%)',
+  },
+  {
+    district: 'Q4',
+    'FD LH': 910,
+    'FD LH color': 'hsl(192, 70%, 50%)',
+    'FD RH': 890,
+    'FD RH color': 'hsl(334, 70%, 50%)',
+    'RD LH': 850,
+    'RD LH color': 'hsl(295, 70%, 50%)',
+    'RD RH': 900,
+    'RD RH color': 'hsl(351, 70%, 50%)',
+  },
+  {
+    district: 'C-BEV',
+    'FD LH': 350,
+    'FD LH color': 'hsl(192, 70%, 50%)',
+    'FD RH': 390,
+    'FD RH color': 'hsl(334, 70%, 50%)',
+    'RD LH': 380,
+    'RD LH color': 'hsl(295, 70%, 50%)',
+    'RD RH': 370,
+    'RD RH color': 'hsl(351, 70%, 50%)',
+  },
+];
+//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
+export const mockBarDataStackedYear = [
+  {
+    district: 'Q3 FD LH',
+    'Ok': 215600,
+		'Nok': 10800,
+  },
+	{
+    district: 'Q3 FD RH',
+    'Ok': 215000,
+		'Nok': 10980,
+  },
+	{
+    district: 'Q3 RD LH',
+    'Ok': 214980,
+		'Nok': 20680,
+  },
+	{
+    district: 'Q3 RD RH',
+    'Ok': 214500,
+		'Nok': 19090,
+  },
+	{
+    district: 'Q4 FD LH',
+    'Ok': 215500,
+		'Nok': 20280,
+  },
+	{
+    district: 'Q4 FD RH',
+    'Ok': 214900,
+		'Nok': 10252,
+  },
+	{
+    district: 'Q4 RD LH',
+    'Ok': 214600,
+		'Nok': 20960,
+  },
+	{
+    district: 'Q4 RD RH',
+    'Ok': 216600,
+		'Nok': 10550,
+  },
+];
+export const mockBarDataStackedMonth = [
+  {
+    district: 'Q3 FD LH',
+    'Ok': 17900,
+		'Nok': 560,
+  },
+	{
+    district: 'Q3 FD RH',
+    'Ok': 17850,
+		'Nok': 580,
+  },
+	{
+    district: 'Q3 RD LH',
+    'Ok': 16900,
+		'Nok': 1200,
+  },
+	{
+    district: 'Q3 RD RH',
+    'Ok': 17000,
+		'Nok': 1690,
+  },
+	{
+    district: 'Q4 FD LH',
+    'Ok': 16080,
+		'Nok': 1280,
+  },
+	{
+    district: 'Q4 FD RH',
+    'Ok': 17680,
+		'Nok': 752,
+  },
+	{
+    district: 'Q4 RD LH',
+    'Ok': 16999,
+		'Nok': 960,
+  },
+	{
+    district: 'Q4 RD RH',
+    'Ok': 17700,
+		'Nok': 550,
+  },
+];
+export const mockBarDataStackedWeek = [
+	{
+    district: 'Q3 FD LH',
+    'Ok': 4500,
+		'Nok': 120,
+  },
+	{
+    district: 'Q3 FD RH',
+    'Ok': 4480,
+		'Nok': 300,
+  },
+	{
+    district: 'Q3 RD LH',
+    'Ok': 4600,
+		'Nok': 88,
+  },
+	{
+    district: 'Q3 RD RH',
+    'Ok': 4560,
+		'Nok': 92,
+  },
+	{
+    district: 'Q4 FD LH',
+    'Ok': 4400,
+		'Nok': 50,
+  },
+	{
+    district: 'Q4 FD RH',
+    'Ok': 4800,
+		'Nok': 89,
+  },
+	{
+    district: 'Q4 RD LH',
+    'Ok': 4520,
+		'Nok': 190,
+  },
+	{
+    district: 'Q4 RD RH',
+    'Ok': 4920,
+		'Nok': 200,
+  },
+];
+export const mockBarDataStackedDay = [
+  {
+    district: 'Q3 FD LH',
+    'Ok': 900,
+		'Nok': 20,
+  },
+	{
+    district: 'Q3 FD RH',
+    'Ok': 920,
+		'Nok': 10,
+  },
+	{
+    district: 'Q3 RD LH',
+    'Ok': 910,
+		'Nok': 30,
+  },
+	{
+    district: 'Q3 RD RH',
+    'Ok': 880,
+		'Nok': 40,
+  },
+	{
+    district: 'Q4 FD LH',
+    'Ok': 880,
+		'Nok': 50,
+  },
+	{
+    district: 'Q4 FD RH',
+    'Ok': 920,
+		'Nok': 5,
+  },
+	{
+    district: 'Q4 RD LH',
+    'Ok': 900,
+		'Nok': 70,
+  },
+	{
+    district: 'Q4 RD RH',
+    'Ok': 880,
+		'Nok': 50,
+  },
+];
+//--------------------------------------------------------------------------------------------
 export const mockPieData = [
   {
     id: 'hack',
@@ -286,43 +562,43 @@ export const mockPieData = [
     color: 'hsl(344, 70%, 50%)',
   },
 ];
-
-export const mockLineData = [
+//......................................................................................
+export const mockLineDataYear = [
   {
     id: 'fact',
     color: 'hsl(25, 70%, 50%)',
     data: [
       {
         x: 'Q3 FD LH',
-        y: 2540,
+        y: 216500,
       },
       {
         x: 'Q3 FD RH ',
-        y: 3500,
+        y: 217200,
       },
       {
         x: 'Q3 RD LH ',
-        y: 2800,
+        y: 216300,
       },
       {
         x: 'Q3 RD RH  ',
-        y: 1965,
+        y: 215100,
       },
       {
         x: 'Q4 FD LH',
-        y: 2985,
+        y: 214900,
       },
       {
         x: 'Q4 FD RH ',
-        y: 3200,
+        y: 216900,
       },
       {
         x: 'Q4 RD LH ',
-        y: 3150,
+        y: 215800,
       },
       {
         x: 'Q4 RD RH  ',
-        y: 3002,
+        y: 217800,
       },
     ],
   },
@@ -332,39 +608,275 @@ export const mockLineData = [
     data: [
       {
         x: 'Q3 FD LH',
-        y: 3000,
+        y: 216000,
       },
       {
         x: 'Q3 FD RH ',
-        y: 3000,
+        y: 216000,
       },
       {
         x: 'Q3 RD LH ',
-        y: 3000,
+        y: 216000,
       },
       {
         x: 'Q3 RD RH  ',
-        y: 3000,
+        y: 216000,
       },
       {
         x: 'Q4 FD LH',
-        y: 3000,
+        y: 216000,
       },
       {
         x: 'Q4 FD RH ',
-        y: 3000,
+        y: 216000,
       },
       {
         x: 'Q4 RD LH ',
-        y: 3000,
+        y: 216000,
       },
       {
         x: 'Q4 RD RH  ',
-        y: 3000,
+        y: 216000,
       },
     ],
   },
 ];
+export const mockLineDataMonth = [
+  {
+    id: 'fact',
+    color: 'hsl(25, 70%, 50%)',
+    data: [
+      {
+        x: 'Q3 FD LH',
+        y: 17800,
+      },
+      {
+        x: 'Q3 FD RH ',
+        y: 16500,
+      },
+      {
+        x: 'Q3 RD LH ',
+        y: 19200,
+      },
+      {
+        x: 'Q3 RD RH  ',
+        y: 19000,
+      },
+      {
+        x: 'Q4 FD LH',
+        y: 17265,
+      },
+      {
+        x: 'Q4 FD RH ',
+        y: 18256,
+      },
+      {
+        x: 'Q4 RD LH ',
+        y: 19120,
+      },
+      {
+        x: 'Q4 RD RH  ',
+        y: 17850,
+      },
+    ],
+  },
+  {
+    id: 'plan',
+    color: 'hsl(255, 70%, 50%)',
+    data: [
+      {
+        x: 'Q3 FD LH',
+        y: 18000,
+      },
+      {
+        x: 'Q3 FD RH ',
+        y: 18000,
+      },
+      {
+        x: 'Q3 RD LH ',
+        y: 18000,
+      },
+      {
+        x: 'Q3 RD RH  ',
+        y: 18000,
+      },
+      {
+        x: 'Q4 FD LH',
+        y: 18000,
+      },
+      {
+        x: 'Q4 FD RH ',
+        y: 18000,
+      },
+      {
+        x: 'Q4 RD LH ',
+        y: 18000,
+      },
+      {
+        x: 'Q4 RD RH  ',
+        y: 18000,
+      },
+    ],
+  },
+];
+export const mockLineDataWeek = [
+  {
+    id: 'fact',
+    color: 'hsl(25, 70%, 50%)',
+    data: [
+      {
+        x: 'Q3 FD LH',
+        y: 3800,
+      },
+      {
+        x: 'Q3 FD RH ',
+        y: 4520,
+      },
+      {
+        x: 'Q3 RD LH ',
+        y: 4200,
+      },
+      {
+        x: 'Q3 RD RH  ',
+        y: 3980,
+      },
+      {
+        x: 'Q4 FD LH',
+        y: 4400,
+      },
+      {
+        x: 'Q4 FD RH ',
+        y: 4450,
+      },
+      {
+        x: 'Q4 RD LH ',
+        y: 4620,
+      },
+      {
+        x: 'Q4 RD RH  ',
+        y: 4450,
+      },
+    ],
+  },
+  {
+    id: 'plan',
+    color: 'hsl(255, 70%, 50%)',
+    data: [
+      {
+        x: 'Q3 FD LH',
+        y: 4500,
+      },
+      {
+        x: 'Q3 FD RH ',
+        y: 4500,
+      },
+      {
+        x: 'Q3 RD LH ',
+        y: 4500,
+      },
+      {
+        x: 'Q3 RD RH  ',
+        y: 4500,
+      },
+      {
+        x: 'Q4 FD LH',
+        y: 4500,
+      },
+      {
+        x: 'Q4 FD RH ',
+        y: 4500,
+      },
+      {
+        x: 'Q4 RD LH ',
+        y: 4500,
+      },
+      {
+        x: 'Q4 RD RH  ',
+        y: 4500,
+      },
+    ],
+  },
+];
+export const mockLineDataDay = [
+  {
+    id: 'fact',
+    color: 'hsl(25, 70%, 50%)',
+    data: [
+      {
+        x: 'Q3 FD LH',
+        y: 840,
+      },
+      {
+        x: 'Q3 FD RH ',
+        y: 920,
+      },
+      {
+        x: 'Q3 RD LH ',
+        y: 880,
+      },
+      {
+        x: 'Q3 RD RH  ',
+        y: 790,
+      },
+      {
+        x: 'Q4 FD LH',
+        y: 860,
+      },
+      {
+        x: 'Q4 FD RH ',
+        y: 780,
+      },
+      {
+        x: 'Q4 RD LH ',
+        y: 910,
+      },
+      {
+        x: 'Q4 RD RH  ',
+        y: 890,
+      },
+    ],
+  },
+  {
+    id: 'plan',
+    color: 'hsl(255, 70%, 50%)',
+    data: [
+      {
+        x: 'Q3 FD LH',
+        y: 900,
+      },
+      {
+        x: 'Q3 FD RH ',
+        y: 900,
+      },
+      {
+        x: 'Q3 RD LH ',
+        y: 900,
+      },
+      {
+        x: 'Q3 RD RH  ',
+        y: 900,
+      },
+      {
+        x: 'Q4 FD LH',
+        y: 900,
+      },
+      {
+        x: 'Q4 FD RH ',
+        y: 900,
+      },
+      {
+        x: 'Q4 RD LH ',
+        y: 900,
+      },
+      {
+        x: 'Q4 RD RH  ',
+        y: 900,
+      },
+    ],
+  },
+];
+
+//-----------------------------------------------------
 
 export const heatMap = [
   {

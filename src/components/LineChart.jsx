@@ -1,13 +1,70 @@
 import { ResponsiveLine } from '@nivo/line';
-import { useTheme } from '@mui/material';
+import { useTheme, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio} from '@mui/material';
 import { tokens } from '../theme';
-import { mockLineData as data } from '../data/mockData';
+//import { mockLineData as data } from '../data/mockData';
+import { mockLineDataYear, mockLineDataMonth, mockLineDataWeek,mockLineDataDay } from '../data/mockData';
+import { useState, useEffect } from 'react';
 
 const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+	const [data, setData] = useState(mockLineDataYear)
+
+
+	const handleChange = (e) => {
+		console.log('e.target', e.target)
+		switch (e.target.value) {
+			case "Year":
+				setData(mockLineDataYear)
+				break;
+			case "Month":
+				setData(mockLineDataMonth)
+				break;
+			case "Week":
+				setData(mockLineDataWeek)
+				break;
+			case "Day":
+				setData(mockLineDataDay)
+				break;
+		
+			default:
+				break;
+		}
+	}
+
+	useEffect(() => {
+		
+	}, [data])
+	
 
   return (
+		<>
+		<FormControl sx={{marginTop:'20px', marginLeft:'20px'}}>
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+				onChange={handleChange}
+      >
+        <FormControlLabel  value="Year" control={
+				<Radio sx={{color:colors.greenAccent[400], 
+				'&.Mui-checked': {color:colors.redAccent[400]}}} />
+				} label="Year" />
+        <FormControlLabel  value="Month" control={
+				<Radio sx={{color:colors.greenAccent[400], 
+				'&.Mui-checked': {color:colors.redAccent[400]
+				}}} />} label="Month" />
+        <FormControlLabel  value="Week" control={
+				<Radio sx={{color:colors.greenAccent[400], 
+				'&.Mui-checked': {color:colors.redAccent[400]
+				}}} />} label="Week" />
+        <FormControlLabel  value="Day" control={
+				<Radio sx={{color:colors.greenAccent[400], 
+				'&.Mui-checked': {color:colors.redAccent[400]
+				}}} />} label="Day" />
+      </RadioGroup>
+    </FormControl>
+
     <ResponsiveLine
       data={data}
       theme={{
@@ -43,7 +100,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
           },
         },
       }}
-      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+      margin={{ top: 10, right: 110, bottom: 50, left: 70 }}
       xScale={{ type: 'point' }}
       yScale={{
         type: 'linear',
@@ -70,7 +127,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
         tickPadding: 5,
         tickRotation: 0,
         legend: 'quantity',
-        legendOffset: -48,
+        legendOffset: -55,
         legendPosition: 'middle',
       }}
       colors={{ scheme: 'category10' }}
@@ -109,6 +166,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
         },
       ]}
     />
+		</>
   );
 };
 
