@@ -31,10 +31,10 @@ function LeaderRoutes() {
   const location = useLocation();
   const role = useSelector(authSelector.userRole);
   //console.log('lead', role);
-  const email = useSelector(authSelector.userEmail);
+  const mail = useSelector(authSelector.userEmail);
   return (
     <>
-      {email === 'leader@mail.com' && (
+      {mail && role && (
         <Routes>
           <Route path="/*" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />

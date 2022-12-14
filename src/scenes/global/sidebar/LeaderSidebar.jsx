@@ -51,7 +51,7 @@ const LeaderSidebar = () => {
 
   return (
     <>
-      {mail === 'leader@mail.com' && (
+      {mail && role && (
         <Box
           style={{ minHeight: '100vh' }}
           sx={{

@@ -10,6 +10,7 @@ import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
 import LinearScaleIcon from '@mui/icons-material/LinearScale';
 import Grid4x4Icon from '@mui/icons-material/Grid4x4';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
@@ -52,11 +53,11 @@ const ManagerSidebar = () => {
   const mail = useSelector(authSelector.userEmail);
   const emailTest = ['manager@mail.com', 'nikitaslipachuk@gmail.com'];
   const access = emailTest.includes(mail);
-  console.log('name', name);
+  //console.log('name', name);
 
   return (
     <>
-      {access && (
+      {mail && (
         <Box
           style={{ minHeight: '100vh' }}
           sx={{
@@ -154,7 +155,7 @@ const ManagerSidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-
+                {/*--------------------------------Production----------------------------------*/}
                 <Typography
                   variant="h6"
                   color={colors.grey[300]}
@@ -183,7 +184,7 @@ const ManagerSidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-
+                {/*--------------------------------Problem----------------------------------*/}
                 <Typography
                   variant="h6"
                   color={colors.grey[300]}
@@ -212,7 +213,23 @@ const ManagerSidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
+                {/*--------------------------Team------------------------------------------------*/}
+                <Typography
+                  variant="h6"
+                  color={colors.grey[300]}
+                  sx={{ m: '15px 0 5px 20px' }}
+                >
+                  Team
+                </Typography>
+                <Item
+                  title="My Team"
+                  to="/team"
+                  icon={<Diversity1Icon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
 
+                {/*--------------------------Charts------------------------------------------------*/}
                 <Typography
                   variant="h6"
                   color={colors.grey[300]}

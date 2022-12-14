@@ -22,6 +22,7 @@ import Bar from '../scenes/charts/Bar/Bar';
 
 import React from 'react';
 import UserAccaunt from '../scenes/UserAccaunt/UserAccaunt';
+import Team from '../scenes/teem/Team';
 
 function ManagerRoutes() {
   const location = useLocation();
@@ -33,17 +34,23 @@ function ManagerRoutes() {
 
   return (
     <>
-      {access && (
+      {email && (
         <Routes>
+          {/*--------------------------Global------------------------------------------------*/}
           <Route path="/*" element={<Navigate to="/dashboard" />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/accaunt" element={<UserAccaunt />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          {/*--------------------------Prod------------------------------------------------*/}
           <Route path="/add-data" element={<AddData />} />
-          <Route path="/production-information" element={<ProductInfo />} />
           <Route path="/dimensions" element={<Dimensions />} />
+          <Route path="/production-information" element={<ProductInfo />} />
+          {/*--------------------------Prob------------------------------------------------*/}
           <Route path="/add-issue" element={<AddIssue />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/issue-list" element={<IssueList />} />
+          {/*--------------------------Team------------------------------------------------*/}
+          <Route path="/team" element={<Team />} />
+          {/*--------------------------Charts------------------------------------------------*/}
           <Route path="/bar" element={<Bar />} />
           <Route path="/pie" element={<Pie />} />
           <Route path="/line" element={<Line />} />
