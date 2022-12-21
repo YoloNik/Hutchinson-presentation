@@ -40,10 +40,9 @@ import { authOperations, authSelector } from '../../../redux/auth';
 //  );
 //};
 
-const LeaderSidebar = () => {
+const LeaderSidebar = ({ isCollapsed, setIsCollapsed }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState('Dashboard');
   const isUserLogIn = useSelector(authSelector.isUserLogin);
   const role = useSelector(authSelector.userRole);
@@ -144,7 +143,7 @@ const LeaderSidebar = () => {
                   <Typography
                     variant="h6"
                     color={colors.grey[300]}
-                    sx={{ m: '15px 0 5px 20px' }}
+                    sx={{ m: '15px 0 5px 20px', textDecoration: 'underline' }}
                   >
                     Production
                   </Typography>

@@ -40,10 +40,9 @@ import { authOperations, authSelector } from '../../../redux/auth';
 //  );
 //};
 
-const EmploeeSidebar = () => {
+const EmploeeSidebar = ({ isCollapsed, setIsCollapsed }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState('Dashboard');
   const isUserLogIn = useSelector(authSelector.isUserLogin);
   const role = useSelector(authSelector.userRole);
@@ -51,7 +50,7 @@ const EmploeeSidebar = () => {
 
   return (
     <>
-      {mail === 'emploee@mail.com' && (
+      {mail === 'employee @mail.com' && (
         <Box
           style={{ minHeight: '100vh' }}
           sx={{
@@ -122,7 +121,7 @@ const EmploeeSidebar = () => {
                       fontWeight="bold"
                       sx={{ m: '10px 0 0 0' }}
                     >
-                      Emploee Name
+                      employee Name
                     </Typography>
                     <Typography variant="h5" color={colors.greenAccent[500]}>
                       {role}

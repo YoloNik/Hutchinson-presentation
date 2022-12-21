@@ -11,11 +11,17 @@ const getProdData = createAsyncThunk(
     const { data } = await axios.get(
       `${BASE_URL}/prodData.json?auth=${DATA_SEACRET}`,
     );
-    return data;
+    const test1 = [];
+    const test = Object.values(data)
+      .flat()
+      .map(el => Object.values(el).map(el => test1.push(el)));
+    test1.map((el, idx) => (el.id = idx));
+    //const allProdinOneArray = { ...allProdArray };
+    //console.log('allProdinOneArray', allProdArray);
+    //return allProdArray;
+    //console.log('test1', test1);
+    return test1;
   },
-  //Object.values(data).map(el =>
-  //    Object.values(el).map(el => dataForChart.push(el)),
-  //  );
 );
 
 const addProdData = createAsyncThunk(

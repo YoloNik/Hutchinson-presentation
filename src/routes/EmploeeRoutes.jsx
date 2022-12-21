@@ -34,7 +34,7 @@ function EmploeeRoutes() {
 
   return (
     <>
-      {email === 'emploee@mail.com' && (
+      {email === 'employee @mail.com' && (
         <Routes>
           <Route path="/*" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />

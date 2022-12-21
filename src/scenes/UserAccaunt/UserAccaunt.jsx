@@ -72,7 +72,7 @@ function UserAccaunt() {
                 >
                   <MenuItem value={'Manager'}>Manager</MenuItem>
                   <MenuItem value={'Leader'}>Leader</MenuItem>
-                  <MenuItem value={'Emploee'}>Emploee</MenuItem>
+                  <MenuItem value={'employee '}>employee </MenuItem>
                 </Select>
               </FormControl>
             </Box>

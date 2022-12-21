@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authSlice from './auth/authSlice';
 import departmetnSlice from './departmetn/departmetnSlice';
+import teamSlice from './taem/teamSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
@@ -13,7 +14,8 @@ const persistTokenConfig = {
 const store = configureStore({
   reducer: {
     auth: persistReducer(persistTokenConfig, authSlice),
-    departmetn: departmetnSlice,
+    department: departmetnSlice,
+    team: teamSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

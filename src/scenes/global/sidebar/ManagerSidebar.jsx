@@ -41,10 +41,10 @@ import { authOperations, authSelector } from '../../../redux/auth';
 //  );
 //};
 
-const ManagerSidebar = () => {
+const ManagerSidebar = ({ isCollapsed, setIsCollapsed }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+
   const [selected, setSelected] = useState('Dashboard');
   const isUserLogIn = useSelector(authSelector.isUserLogin);
   const name = useSelector(authSelector.userName);
@@ -159,7 +159,10 @@ const ManagerSidebar = () => {
                 <Typography
                   variant="h6"
                   color={colors.grey[300]}
-                  sx={{ m: '15px 0 5px 20px' }}
+                  sx={{
+                    m: '10px 0px 10px 0px',
+                    textAlign: 'center',
+                  }}
                 >
                   Production
                 </Typography>
@@ -188,7 +191,7 @@ const ManagerSidebar = () => {
                 <Typography
                   variant="h6"
                   color={colors.grey[300]}
-                  sx={{ m: '15px 0 5px 20px' }}
+                  sx={{ m: '10px 0px 10px 0px', textAlign: 'center' }}
                 >
                   Problem
                 </Typography>
@@ -217,7 +220,7 @@ const ManagerSidebar = () => {
                 <Typography
                   variant="h6"
                   color={colors.grey[300]}
-                  sx={{ m: '15px 0 5px 20px' }}
+                  sx={{ m: '10px 0px 10px 0px', textAlign: 'center' }}
                 >
                   Team
                 </Typography>
@@ -233,7 +236,7 @@ const ManagerSidebar = () => {
                 <Typography
                   variant="h6"
                   color={colors.grey[300]}
-                  sx={{ m: '15px 0 5px 20px' }}
+                  sx={{ m: '10px 0px 10px 0px', textAlign: 'center' }}
                 >
                   Charts
                 </Typography>

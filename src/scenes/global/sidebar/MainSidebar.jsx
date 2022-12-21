@@ -46,17 +46,27 @@ import EmploeeSidebar from './EmploeeSidebar';
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState('Dashboard');
   const isUserLogIn = useSelector(authSelector.isUserLogin);
   const role = useSelector(authSelector.userRole);
   const mail = useSelector(authSelector.userEmail);
+  console.log('first', isCollapsed);
 
   return (
     <>
-      <ManagerSidebar />
-      <LeaderSidebar />
-      <EmploeeSidebar />
+      <ManagerSidebar
+        isCollapsed={isCollapsed}
+        setIsCollapsed={setIsCollapsed}
+      />
+      <LeaderSidebar
+        isCollapsed={isCollapsed}
+        setIsCollapsed={setIsCollapsed}
+      />
+      <EmploeeSidebar
+        isCollapsed={isCollapsed}
+        setIsCollapsed={setIsCollapsed}
+      />
     </>
   );
 };

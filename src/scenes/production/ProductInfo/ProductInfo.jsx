@@ -4,32 +4,76 @@ import { tokens } from '../../../theme';
 import { mockDataContacts } from '../../../data/mockData';
 import Header from '../../../components/Header';
 import { useTheme } from '@mui/material';
-//import { useEffect, useMemo } from 'react';
-//import axios from 'axios';
-//import { getProdData } from '../../../redux/departmetn/departmentOperations';
-//import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { getProdData } from '../../../redux/departmetn/departmentOperations';
+import { useDispatch, useSelector } from 'react-redux';
+import { allProdData } from '../../../redux/departmetn/departmentSelector';
+import { useState } from 'react';
+import { useMemo } from 'react';
 
 const ProductInfo = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  //const dispatch = useDispatch;
+  const date = new Date().getHours();
+  const date1 = new Date().getMinutes();
+  const currenDate = new Date().toLocaleString();
+  const day = currenDate.split('').slice(0, 10).join('');
+  const time = currenDate.split('').slice(12).join('');
 
-  //dispatch(getProdData());
+  const dispatch = useDispatch();
+  const currentProdData = useSelector(allProdData);
+  const [currentShift, setcurrentShift] = useState();
+  const test = +time.replace(/:/g, '');
 
-  //useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    dispatch(getProdData());
+    switch (test) {
+      case test >= 545 && test < 1345:
+        setcurrentShift(1);
+        break;
+      case test >= 1345 && test < 2145:
+        setcurrentShift(2);
+        break;
+      case test >= 2145 && test < 545:
+        setcurrentShift(3);
+        break;
+      default:
+        break;
+    }
+  }, [currentShift, dispatch, test]);
+
+  const initialValues = {
+    name: '',
+    time: '',
+    department: '',
+    project: '',
+    side: '',
+    type: '',
+    ok: '',
+    nok: '',
+    rework: '',
+
+    //leaderComment: '',
+    //operatorComment: '',
+  };
 
   const columns = [
-    { field: 'id', headerName: 'ID', flex: 0.5 },
-    { field: 'district', headerName: 'District' },
     {
-      field: 'workPlace',
-      headerName: 'Work Place',
+      field: `name`,
+      headerName: 'Name',
+      flex: 0.5,
+    },
+    { field: `${currentShift}`, headerName: 'Shift' },
+    {
+      field: 'department',
+      headerName: 'Department',
       flex: 1,
       cellClassName: 'name-column--cell',
     },
     {
-      field: 'part',
-      headerName: 'Type',
+      field: 'project',
+      headerName: 'Project',
       headerAlign: 'left',
       align: 'left',
     },
@@ -39,8 +83,8 @@ const ProductInfo = () => {
       flex: 1,
     },
     {
-      field: 'quantityProd',
-      headerName: 'Quantity of products',
+      field: 'type',
+      headerName: 'Type',
       flex: 1,
     },
     {
@@ -54,28 +98,25 @@ const ProductInfo = () => {
       flex: 1,
     },
     {
-      field: 'quantityIssue',
-      headerName: 'Quantity issue',
+      field: 'rework',
+      headerName: 'Rework',
       flex: 1,
     },
   ];
 
-  //const dataForChart = useMemo(() => {
-  //  return [
-  //    {
-  //      id: 'test',
-  //      district: 'test',
-  //      workPlace: 'test',
-  //      part: 'test',
-  //      side: 'test',
-  //      quantityProd: 'test',
-  //      ok: 'test',
-  //      nok: 'test',
-  //      quantityIssue: 'test',
-  //    },
-  //  ];
-  //}, []);
-
+  const dataForChart = [
+    {
+      id: 'test',
+      district: 'test',
+      workPlace: 'test',
+      part: 'test',
+      side: 'test',
+      quantityProd: 'test',
+      ok: 'test',
+      nok: 'test',
+      quantityIssue: 'test',
+    },
+  ];
   return (
     <Box m="20px">
       <Header title="DATA" subtitle="List of Data" />
@@ -112,7 +153,7 @@ const ProductInfo = () => {
         }}
       >
         <DataGrid
-          rows={mockDataContacts}
+          rows={currentProdData}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />
