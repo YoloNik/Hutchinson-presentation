@@ -29,12 +29,13 @@ import UserAccaunt from '../scenes/UserAccaunt/UserAccaunt';
 
 function LeaderRoutes() {
   const location = useLocation();
-  const role = useSelector(authSelector.userRole);
-  //console.log('lead', role);
-  const mail = useSelector(authSelector.userEmail);
+  const displayName = useSelector(authSelector.userName);
+  //console.log('lead', displayName);
+  const isUserLogin = useSelector(authSelector.isUserLogin);
+  const access = ['tets'];
   return (
     <>
-      {mail && role && (
+      {access.includes('leader@mail.com') && (
         <Routes>
           <Route path="/*" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />

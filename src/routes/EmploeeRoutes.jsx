@@ -29,12 +29,12 @@ import UserAccaunt from '../scenes/UserAccaunt/UserAccaunt';
 
 function EmploeeRoutes() {
   const location = useLocation();
-  const role = useSelector(authSelector.userRole);
+  const displayName = useSelector(authSelector.userName);
   const email = useSelector(authSelector.userEmail);
 
   return (
     <>
-      {email === 'employee @mail.com' && (
+      {email === 'employee.@mail.com' && (
         <Routes>
           <Route path="/*" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />

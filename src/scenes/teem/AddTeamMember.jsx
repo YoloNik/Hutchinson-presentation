@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import TeamRadar from './TeamRadar';
 import {
-  addTeamData,
+  addEmployee,
   editTeamData,
   getTeamData,
 } from '../../redux/taem/teamOperations';
@@ -28,6 +28,7 @@ import { emploeeAllData, emploeeRate } from '../../redux/taem/teamSelector';
 import { useEffect } from 'react';
 import { userName } from '../../redux/auth/authSelector';
 import { toast } from 'react-toastify';
+import { v4 as uuidv4 } from 'uuid';
 
 const style = {
   position: 'absolute',
@@ -76,27 +77,35 @@ export default function AddTeamMember({
   };
 
   const handleFormSubmit = values => {
-    console.log('values', values);
-    dispatch(addTeamData(values));
+    const initials = values.name.charAt(0);
+    console.log('first', initials);
+    const currentDate = new Date().toLocaleString();
+    const employee = { ...values, id: uuidv4(), createdAt: currentDate };
+    dispatch(addEmployee(employee));
     toast.success('Employee added');
+    closeTeamMemberModal();
   };
 
   const initialValues = {
     name: '',
+    card: '',
+    phone: '',
     department: '',
     project: '',
-    workPlace: '',
-    side: '',
-    number: '',
+    process: '',
+    //workPlace: '',
+    rating: 0,
   };
 
   const checkoutSchema = yup.object().shape({
     name: yup.string().required(),
+    card: yup.number(),
+    phone: yup.string(),
     department: yup.string().required(),
     project: yup.string().required(),
-    workPlace: yup.string().required(),
-    side: yup.string().required(),
-    number: yup.number().required(),
+    process: yup.string().required(),
+    //workPlace: yup.string().required(),
+    rating: yup.number(),
   });
 
   return (
@@ -127,10 +136,10 @@ export default function AddTeamMember({
                 <Box
                   display="grid"
                   gap="30px"
-                  gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                  gridTemplateColumns="repeat(3, minmax(0, 1fr))"
                   sx={{
                     '& > div': {
-                      gridColumn: isNonMobile ? undefined : 'span 4',
+                      gridColumn: isNonMobile ? undefined : 'span 3',
                     },
                   }}
                 >
@@ -146,18 +155,31 @@ export default function AddTeamMember({
                     name="name"
                     error={!!touched.name && !!errors.name}
                     helperText={touched.name && errors.name}
-                    sx={{ gridColumn: 'span 4' }}
+                    sx={{ gridColumn: 'span 3' }}
+                  />
+                  {/* card-------------------------------------------------------- */}
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="number"
+                    label="Card"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.card}
+                    name="card"
+                    error={!!touched.card && !!errors.card}
+                    helperText={touched.card && errors.card}
+                    sx={{ gridColumn: 'span 3' }}
                   />
                   {/* department-------------------------------------------------------- */}
-                  {values.name ? (
+                  {values.name && values.card ? (
                     <FormControl
-                      sx={{ m: 1, minWidth: 120, gridColumn: 'span 2' }}
+                      sx={{ m: 1, minWidth: 120, gridColumn: 'span 1' }}
                     >
                       <InputLabel htmlFor="grouped-native-department">
                         Department
                       </InputLabel>
                       <Select
-                        defaultValue=""
                         native
                         id="grouped-native-department"
                         label="Department"
@@ -165,15 +187,9 @@ export default function AddTeamMember({
                         onChange={handleChange}
                         value={values.department}
                       >
-                        <option
-                          selected="selected"
-                          value={''}
-                          aria-label="None"
-                        />
-                        <optgroup label="Audi">
-                          <option value={'02c10'}>02c10</option>
-                          <option value={'02c34'}>02c34</option>
-                        </optgroup>
+                        <option value="" aria-label="None" />
+                        <option value={'02c10'}>02c10</option>
+                        <option value={'02c34'}>02c34</option>
                       </Select>
                     </FormControl>
                   ) : (
@@ -183,7 +199,7 @@ export default function AddTeamMember({
                         m: 1,
                         minWidth: 120,
                         opacity: 0.3,
-                        gridColumn: 'span 2',
+                        gridColumn: 'span 1',
                       }}
                     >
                       <InputLabel htmlFor="grouped-native-department">
@@ -193,9 +209,9 @@ export default function AddTeamMember({
                     </FormControl>
                   )}
                   {/* Project-------------------------------------------------------- */}
-                  {values.department && values.name ? (
+                  {values.department && values.name && values.card ? (
                     <FormControl
-                      sx={{ m: 1, minWidth: 120, gridColumn: 'span 2' }}
+                      sx={{ m: 1, minWidth: 120, gridColumn: 'span 1' }}
                     >
                       <InputLabel htmlFor="grouped-native-project">
                         Project
@@ -208,21 +224,15 @@ export default function AddTeamMember({
                         onChange={handleChange}
                         value={values.project}
                       >
-                        <option
-                          selected="selected"
-                          value={''}
-                          aria-label="None"
-                        />
+                        <option value="" aria-label="None" />
                         {values.department === '02c10' ? (
-                          <optgroup label="Audi">
+                          <>
                             <option value={'Q3'}>Q3</option>
                             <option value={'Q4'}>Q4</option>
-                          </optgroup>
+                          </>
                         ) : (
                           //<optgroup label="C-BEV">
-                          <option selected="selected" value={'C-BEV'}>
-                            C-BEV
-                          </option>
+                          <option value={'C-BEV'}>C-BEV</option>
                           //</optgroup>
                         )}
                       </Select>
@@ -234,7 +244,7 @@ export default function AddTeamMember({
                         m: 1,
                         minWidth: 120,
                         opacity: 0.3,
-                        gridColumn: 'span 2',
+                        gridColumn: 'span 1',
                       }}
                     >
                       <InputLabel htmlFor="grouped-native-project">
@@ -243,8 +253,54 @@ export default function AddTeamMember({
                       <Select defaultValue="" name="project" />
                     </FormControl>
                   )}
+                  {/* Process-------------------------------------------------------- */}
+                  {values.department &&
+                  values.name &&
+                  values.card &&
+                  values.project ? (
+                    <FormControl
+                      sx={{ m: 1, minWidth: 120, gridColumn: 'span 1' }}
+                    >
+                      <InputLabel htmlFor="grouped-select-process">
+                        Process
+                      </InputLabel>
+                      <Select
+                        native
+                        id="grouped-select-process"
+                        label="Process"
+                        name="process"
+                        onChange={handleChange}
+                        value={values.process}
+                      >
+                        <option value="" aria-label="None" />
+                        <option value={'transfer'}>Transfer</option>
+                        <option value={'cuting'}>Cuting</option>
+                        <option value={'forming'}>Forming</option>
+                        <option value={'cleaning'}>Cleaning</option>
+                      </Select>
+                    </FormControl>
+                  ) : (
+                    <FormControl
+                      disabled
+                      sx={{
+                        m: 1,
+                        minWidth: 120,
+                        opacity: 0.3,
+                        gridColumn: 'span 1',
+                      }}
+                    >
+                      <InputLabel htmlFor="grouped-select-process">
+                        Process
+                      </InputLabel>
+                      <Select defaultValue="" name="process" />
+                    </FormControl>
+                  )}
                   {/* Work Place-------------------------------------------------------- */}
-                  {values.department && values.name && values.project ? (
+                  {/*{values.department &&
+                  values.name &&
+                  values.card &&
+                  values.project &&
+                  values.process ? (
                     <FormControl
                       sx={{ m: 1, minWidth: 120, gridColumn: 'span 2' }}
                     >
@@ -259,28 +315,11 @@ export default function AddTeamMember({
                         onChange={handleChange}
                         value={values.workPlace}
                       >
-                        <option
-                          selected="selected"
-                          value={''}
-                          aria-label="None"
-                        />
-                        <optgroup label="Transfer">
-                          <option selected="selected" value={'transfer'}>
-                            Transfer
-                          </option>
-                        </optgroup>
-                        <optgroup label="Cut">
-                          <option value={'cut'}>Cut</option>
-                        </optgroup>
-                        <optgroup label="Form">
-                          <option value={'RD'}>RD</option>
-                          <option value={'FD'}>FD</option>
-                        </optgroup>
-                        <optgroup label="Cleaning">
-                          {/*<option value={'cleaning'}>Cleaning</option>*/}
-                          <option value={'RD'}>RD</option>
-                          <option value={'FD'}>FD</option>
-                        </optgroup>
+                        <option value="" aria-label="None" />
+                          <option value={'transfer'}>Transfer</option>
+                          <option value={'cuting'}>Cuting</option>
+                          <option value={'forming'}>Forming</option>
+                          <option value={'cleaning'}>Cleaning</option>
                       </Select>
                     </FormControl>
                   ) : (
@@ -298,94 +337,40 @@ export default function AddTeamMember({
                       </InputLabel>
                       <Select defaultValue="" name="workPlace" />
                     </FormControl>
-                  )}
+                  )}*/}
 
-                  {/* Side-------------------------------------------------------- */}
-                  {values.department &&
-                  values.name &&
-                  values.project &&
-                  values.workPlace ? (
-                    <FormControl
-                      sx={{ m: 1, minWidth: 120, gridColumn: 'span 2' }}
-                    >
-                      <InputLabel htmlFor="grouped-select-side">
-                        Side
-                      </InputLabel>
-                      <Select
-                        native
-                        id="grouped-select-side"
-                        label="Side"
-                        name="side"
-                        onChange={handleChange}
-                        value={values.side}
-                      >
-                        <option
-                          selected="selected"
-                          value={''}
-                          aria-label="None"
-                        />
-                        {values.workPlace !== 'transfer' ? (
-                          <optgroup label="Side">
-                            <option selected="selected" value={'LH'}>
-                              LH
-                            </option>
-                            <option value={'RH'}>RH</option>
-                            <option value={'LH/RH'}>LH/RH</option>
-                          </optgroup>
-                        ) : (
-                          <option value={'LH/RH'}>LH/RH</option>
-                        )}
-                      </Select>
-                    </FormControl>
-                  ) : (
-                    <FormControl
-                      disabled
-                      sx={{
-                        m: 1,
-                        minWidth: 120,
-                        opacity: 0.3,
-                        gridColumn: 'span 2',
-                      }}
-                    >
-                      <InputLabel htmlFor="grouped-select-side">
-                        Side
-                      </InputLabel>
-                      <Select defaultValue="" name="side" />
-                    </FormControl>
-                  )}
                   {/* Phone Number-------------------------------------------------------- */}
                   {values.department &&
                   values.name &&
                   values.project &&
-                  values.workPlace &&
-                  values.side ? (
+                  values.process ? (
                     <TextField
                       fullWidth
                       variant="filled"
-                      type="number"
+                      type="text"
                       label="Phone Number"
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.header}
-                      name="number"
-                      error={!!touched.number && !!errors.number}
-                      helperText={touched.number && errors.number}
-                      sx={{ gridColumn: 'span 4' }}
+                      value={values.phone}
+                      name="phone"
+                      error={!!touched.phone && !!errors.phone}
+                      helperText={touched.phone && errors.phone}
+                      sx={{ gridColumn: 'span 3' }}
                     />
                   ) : (
                     <TextField
                       fullWidth
                       disabled
                       variant="filled"
-                      type="number"
+                      type="phone"
                       label="Phone Number"
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.header}
-                      name="number"
-                      error={!!touched.number && !!errors.number}
-                      helperText={touched.number && errors.number}
-                      sx={{ gridColumn: 'span 4', opacity: 0.3 }}
+                      value={values.phone}
+                      name="phone"
+                      error={!!touched.phone && !!errors.phone}
+                      helperText={touched.phone && errors.phone}
+                      sx={{ gridColumn: 'span 3', opacity: 0.3 }}
                     />
                   )}
                 </Box>

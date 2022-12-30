@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getTeamData } from './teamOperations';
+import { getTeamData, addDataForEmployee } from './teamOperations';
 
 const initialState = {
   employee: [],
@@ -34,6 +34,19 @@ export const teamSlice = createSlice({
         state.employee = payload.map(el => el);
       })
       .addCase(getTeamData.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(addDataForEmployee.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addDataForEmployee.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        console.log('first', payload);
+        //state.employee = payload.map(el => el);
+      })
+      .addCase(addDataForEmployee.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });

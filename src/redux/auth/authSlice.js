@@ -4,7 +4,7 @@ import {
   signIn,
   getUser,
   refreshToken,
-  selectRole,
+  changeDisplayName,
   googleSignIn,
 } from './authOperations';
 
@@ -12,7 +12,7 @@ const initialState = {
   user: {
     name: null,
     email: null,
-    role: null,
+    displayName: null,
     emailVerified: null,
     photoURL: null,
     phoneNumber: null,
@@ -98,7 +98,7 @@ const authSlice = createSlice({
         //console.log('payload', payload);
         state.loading = false;
         state.user.email = payload.user.email;
-        state.user.name = payload.user.displayName;
+        state.user.displayName = payload.user.providerData[0].displayName;
         state.user.phoneNumber = payload.user.phoneNumber;
         state.user.emailVerified = payload.user.emailVerified;
         state.user.photoURL = payload.user.photoURL;
@@ -127,16 +127,18 @@ const authSlice = createSlice({
         state.idToken = null;
         state.refreshToken = null;
       })
-      //selectRole------------------------------------------------
-      .addCase(selectRole.pending, state => {
+      //selectdisplayName------------------------------------------------
+      .addCase(changeDisplayName.pending, state => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(selectRole.fulfilled, (state, { payload }) => {
+      .addCase(changeDisplayName.fulfilled, (state, { payload }) => {
+        //console.log('payload', payload);
         state.loading = false;
-        state.user.role = payload.displayName;
+        state.user.displayName = payload.displayName;
+        //state.user.name = payload.providerUserInfo[0].displayName;
       })
-      .addCase(selectRole.rejected, (state, { payload }) => {
+      .addCase(changeDisplayName.rejected, (state, { payload }) => {
         state.error = payload;
         state.loading = false;
       });

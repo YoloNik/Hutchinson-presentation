@@ -12,7 +12,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
 
 
 	const handleChange = (e) => {
-		console.log('e.target', e.target)
+		//console.log('e.target', e.target)
 		switch (e.target.value) {
 			case "Year":
 				setData(mockLineDataYear)

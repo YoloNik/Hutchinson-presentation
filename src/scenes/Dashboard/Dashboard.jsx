@@ -1,5 +1,6 @@
 import { Box, Button, IconButton, Typography, useTheme } from '@mui/material';
 import { tokens } from '../../theme';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
@@ -12,10 +13,12 @@ import StatBox from '../../components/StatBox';
 import ProgressCircle from '../../components/ProgressCircle';
 import HeatMap from '../../components/HeatMap';
 import Radar from '../../components/Radar';
+import { radar } from '../../data/mockData';
 import TimeRange from '../../components/TimeRange';
 
-
 const Dashboard = () => {
+  const isNonMobile = useMediaQuery('(min-width:600px)');
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -43,9 +46,11 @@ const Dashboard = () => {
 
       {/* GRID & CHARTS */}
       <Box
+        //display={isNonMobile ? 'grid' : 'flex'}
         display="grid"
         gridTemplateColumns="repeat(9, 1fr)"
         gridAutoRows="140px"
+        //flexDirection='column'
         gap="20px"
       >
         {/* ROW 1 */}
@@ -150,7 +155,7 @@ const Dashboard = () => {
         </Box>
 
         {/* ROW 3 */}
-				<Box
+        <Box
           gridColumn="span 9"
           gridRow="span 3"
           backgroundColor={colors.primary[400]}
@@ -166,8 +171,8 @@ const Dashboard = () => {
             <BarChartStacked isDashboard={true} />
           </Box>
         </Box>
-				{/* ROW 4 */}
-				<Box
+        {/* ROW 4 */}
+        <Box
           gridColumn="span 3"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -239,11 +244,11 @@ const Dashboard = () => {
             Radar
           </Typography>
           <Box height="250px" mt="-20px">
-            <Radar isDashboard={true} />
+            <Radar data={radar} isDashboard={true} />
           </Box>
         </Box>
-				{/* ROW 4 */}
-				
+        {/* ROW 4 */}
+
         <Box
           gridColumn="span 9"
           gridRow="span 3"

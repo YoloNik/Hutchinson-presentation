@@ -26,7 +26,7 @@ const getProdData = createAsyncThunk(
 
 const addProdData = createAsyncThunk(
   'department/addProdData',
-  async (body, { getState }) => {
+  async (body, { getState, dispatch }) => {
     const localId = getState().auth.localId;
     const time = new Date().toLocaleString();
 
@@ -37,6 +37,7 @@ const addProdData = createAsyncThunk(
         time: time,
       },
     );
+    dispatch(getProdData());
     return data;
   },
 );

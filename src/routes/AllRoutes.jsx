@@ -37,7 +37,7 @@ import { useEffect } from 'react';
 function AllRoutes() {
   const location = useLocation();
   const isUserLogIn = useSelector(authSelector.isUserLogin);
-  const role = useSelector(authSelector.userRole);
+  const displayName = useSelector(authSelector.userName);
   const email = useSelector(authSelector.userEmail);
   const [user] = useAuthState(auth);
   useEffect(() => {

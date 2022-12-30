@@ -23,25 +23,12 @@ const ProductInfo = () => {
 
   const dispatch = useDispatch();
   const currentProdData = useSelector(allProdData);
-  const [currentShift, setcurrentShift] = useState();
+
   const test = +time.replace(/:/g, '');
 
   useEffect(() => {
     dispatch(getProdData());
-    switch (test) {
-      case test >= 545 && test < 1345:
-        setcurrentShift(1);
-        break;
-      case test >= 1345 && test < 2145:
-        setcurrentShift(2);
-        break;
-      case test >= 2145 && test < 545:
-        setcurrentShift(3);
-        break;
-      default:
-        break;
-    }
-  }, [currentShift, dispatch, test]);
+  }, [dispatch, test]);
 
   const initialValues = {
     name: '',
@@ -62,45 +49,56 @@ const ProductInfo = () => {
     {
       field: `name`,
       headerName: 'Name',
-      flex: 0.5,
+      flex: 2,
     },
-    { field: `${currentShift}`, headerName: 'Shift' },
+    {
+      field: 'shift',
+      flex: 0.5,
+      headerName: 'Shift',
+    },
     {
       field: 'department',
       headerName: 'Department',
-      flex: 1,
-      cellClassName: 'name-column--cell',
+      flex: 1.5,
+      //cellClassName: 'name-column--cell',
     },
     {
       field: 'project',
       headerName: 'Project',
       headerAlign: 'left',
       align: 'left',
-    },
-    {
-      field: 'side',
-      headerName: 'Side',
       flex: 1,
     },
     {
       field: 'type',
       headerName: 'Type',
+      flex: 0.5,
+    },
+    {
+      field: 'process',
+      headerName: 'Process',
       flex: 1,
     },
     {
+      field: 'workPlace',
+      headerName: 'Work Place',
+      flex: 1,
+    },
+
+    {
       field: 'ok',
       headerName: 'Ok',
-      flex: 1,
+      flex: 0.5,
     },
     {
       field: 'nok',
       headerName: 'Nok',
-      flex: 1,
+      flex: 0.5,
     },
     {
       field: 'rework',
       headerName: 'Rework',
-      flex: 1,
+      flex: 0.5,
     },
   ];
 
@@ -122,7 +120,7 @@ const ProductInfo = () => {
       <Header title="DATA" subtitle="List of Data" />
       <Box
         m="40px 0 0 0"
-        height="75vh"
+        height="100vh"
         sx={{
           '& .MuiDataGrid-root': {
             border: 'none',

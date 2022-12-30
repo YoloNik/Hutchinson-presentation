@@ -66,12 +66,20 @@ const signIn = createAsyncThunk(
 
 const googleSignIn = createAsyncThunk(
   'auth/googleSignIn',
-  async (credentials, { rejectWithValue }) => {
-    const googleSignin = () => {
-      const provider = new GoogleAuthProvider();
-      return signInWithPopup(auth, provider);
-    };
-    return googleSignin();
+  (credentials, { rejectWithValue, dispatch }) => {
+    try {
+      const googleSignin = () => {
+        const provider = new GoogleAuthProvider();
+        return signInWithPopup(auth, provider);
+      };
+      return googleSignin();
+    } catch (error) {
+      const errorMessage = error.response.data.error.message;
+      if (errorMessage === 'INVALID_ID_TOKEN') {
+        dispatch(refreshToken());
+      }
+      rejectWithValue(errorMessage);
+    }
   },
 );
 
@@ -101,8 +109,8 @@ const refreshToken = createAsyncThunk(
   },
 );
 
-const selectRole = createAsyncThunk(
-  'accaunt/selectRole',
+const changeDisplayName = createAsyncThunk(
+  'accaunt/selectdisplayName',
   async (credentials, thunkApi) => {
     try {
       const persistToken = thunkApi.getState().auth.idToken;
@@ -113,7 +121,7 @@ const selectRole = createAsyncThunk(
       //console.log('cre', credentials);
       const body = {
         idToken: persistToken,
-        displayName: credentials.role,
+        displayName: credentials.displayName,
       };
       const { data } = await axios.post(
         `${BASE_URL}:update?key=${API_KEY}`,
@@ -127,4 +135,11 @@ const selectRole = createAsyncThunk(
   },
 );
 
-export { signUp, signIn, getUser, refreshToken, selectRole, googleSignIn };
+export {
+  signUp,
+  signIn,
+  getUser,
+  refreshToken,
+  changeDisplayName,
+  googleSignIn,
+};

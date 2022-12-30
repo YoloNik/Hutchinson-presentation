@@ -1,26 +1,26 @@
-const emploeeName = state => state.team.name;
-const emploeePhotoURL = state => state.team.avater;
-const emploeeEmail = state => state.team.email;
-const emploeeNumber = state => state.team.role;
-const emploeeComment = state => state.team.comment;
-const emploeeRate = state => state.team.rate;
-const emploeeSixS = state => state.team.sixS;
-const emploeeId = state => state.team.id;
-const emploeeAllData = state => state.team.employee;
+const employeeName = state => state.team.name;
+const employeePhotoURL = state => state.team.avater;
+const employeeEmail = state => state.team.email;
+const employeeNumber = state => state.team.displayName;
+const employeeComment = state => state.team.comment;
+const employeeRate = state => state.team.rate;
+const employeeSixS = state => state.team.sixS;
+const employeeId = state => state.team.id;
+const employeeAllData = state => state.team.employee;
 
-const emploeeError = state => state.team.error;
-const emploeeLoading = state => state.team.loading;
+const employeeError = state => state.team.error;
+const employeeLoading = state => state.team.loading;
 
 export {
-  emploeeName,
-  emploeePhotoURL,
-  emploeeEmail,
-  emploeeNumber,
-  emploeeComment,
-  emploeeRate,
-  emploeeSixS,
-  emploeeId,
-  emploeeError,
-  emploeeLoading,
-  emploeeAllData,
+  employeeName,
+  employeePhotoURL,
+  employeeEmail,
+  employeeNumber,
+  employeeComment,
+  employeeRate,
+  employeeSixS,
+  employeeId,
+  employeeError,
+  employeeLoading,
+  employeeAllData,
 };

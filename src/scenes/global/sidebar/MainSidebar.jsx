@@ -49,9 +49,9 @@ const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState('Dashboard');
   const isUserLogIn = useSelector(authSelector.isUserLogin);
-  const role = useSelector(authSelector.userRole);
+  const displayName = useSelector(authSelector.userName);
   const mail = useSelector(authSelector.userEmail);
-  console.log('first', isCollapsed);
+  //console.log('first', isCollapsed);
 
   return (
     <>

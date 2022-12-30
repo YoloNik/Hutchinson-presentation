@@ -35,7 +35,7 @@ const Calendar = () => {
       });
     }
   };
-	let todayStr = new Date().toISOString().replace(/T.*$/, '')
+  let todayStr = new Date().toISOString().replace(/T.*$/, '');
 
   const handleEventClick = selected => {
     if (
@@ -47,43 +47,41 @@ const Calendar = () => {
     }
   };
 
-
-	const time = new Date()
-console.log(formatDate(time))
-	const calendarData = [
-		{
-			id: '1',
-			title: 'Equipment failure C-BEV',
-			date: `2022-11-29`,
-			start: todayStr + 'T06:30:00',
-			end: todayStr + 'T12:00:00',
-			color: colors.redAccent[500]
-		},
-		{
-			id: '2',
-			title: 'Pęknięcie Q4 M41 LH',
-			date: `2022-11-27`,
-			start: todayStr + 'T01:00:00',
-			end: todayStr + 'T04:00:00',
-			color: colors.redAccent[500]
-		},
-		{
-			id: '3',
-			title: 'Pęknięcie Q3 M5 RH',
-			date: '2022-11-28',
-			start: todayStr + 'T14:50:00',
-			end: todayStr + 'T15:30:00',
-			color: colors.redAccent[500]
-		},
-		{
-			id: '4',
-			title: 'Pęknięcie Q3 M1 RH',
-			date: '2022-11-27',
-			start: todayStr + 'T19:00:00',
-			end: todayStr + 'T22:00:00',
-			color: colors.redAccent[500]
-		},
-	]
+  const time = new Date()(formatDate(time));
+  const calendarData = [
+    {
+      id: '1',
+      title: 'Equipment failure C-BEV',
+      date: `2022-11-29`,
+      start: todayStr + 'T06:30:00',
+      end: todayStr + 'T12:00:00',
+      color: colors.redAccent[500],
+    },
+    {
+      id: '2',
+      title: 'Pęknięcie Q4 M41 LH',
+      date: `2022-11-27`,
+      start: todayStr + 'T01:00:00',
+      end: todayStr + 'T04:00:00',
+      color: colors.redAccent[500],
+    },
+    {
+      id: '3',
+      title: 'Pęknięcie Q3 M5 RH',
+      date: '2022-11-28',
+      start: todayStr + 'T14:50:00',
+      end: todayStr + 'T15:30:00',
+      color: colors.redAccent[500],
+    },
+    {
+      id: '4',
+      title: 'Pęknięcie Q3 M1 RH',
+      date: '2022-11-27',
+      start: todayStr + 'T19:00:00',
+      end: todayStr + 'T22:00:00',
+      color: colors.redAccent[500],
+    },
+  ];
 
   return (
     <Box m="20px">

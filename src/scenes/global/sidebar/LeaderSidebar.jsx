@@ -45,12 +45,13 @@ const LeaderSidebar = ({ isCollapsed, setIsCollapsed }) => {
   const colors = tokens(theme.palette.mode);
   const [selected, setSelected] = useState('Dashboard');
   const isUserLogIn = useSelector(authSelector.isUserLogin);
-  const role = useSelector(authSelector.userRole);
+  const displayName = useSelector(authSelector.userName);
   const mail = useSelector(authSelector.userEmail);
+  const access = ['tets'];
 
   return (
     <>
-      {mail && role && (
+      {access.includes('leader@mail.com') && (
         <Box
           style={{ minHeight: '100vh' }}
           sx={{
@@ -124,7 +125,7 @@ const LeaderSidebar = ({ isCollapsed, setIsCollapsed }) => {
                       Leader Name
                     </Typography>
                     <Typography variant="h5" color={colors.greenAccent[500]}>
-                      {role}
+                      {displayName}
                     </Typography>
                   </Box>
                 </Box>

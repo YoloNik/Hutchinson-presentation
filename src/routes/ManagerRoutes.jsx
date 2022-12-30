@@ -23,18 +23,20 @@ import Bar from '../scenes/charts/Bar/Bar';
 import React from 'react';
 import UserAccaunt from '../scenes/UserAccaunt/UserAccaunt';
 import Team from '../scenes/teem/Team';
+import Member from '../scenes/teem/Member';
 
 function ManagerRoutes() {
   const location = useLocation();
-  const role = useSelector(authSelector.userRole);
+  const displayName = useSelector(authSelector.userName);
+  const isUserLogin = useSelector(authSelector.isUserLogin);
   const email = useSelector(authSelector.userEmail);
-  //console.log(' man', role);
+  //console.log(' man', displayName);
   const emailTest = ['manager@mail.com', 'nikitaslipachuk@gmail.com'];
   const access = emailTest.includes(email);
 
   return (
     <>
-      {email && (
+      {isUserLogin && (
         <Routes>
           {/*--------------------------Global------------------------------------------------*/}
           <Route path="/*" element={<Navigate to="/dashboard" />} />
@@ -49,7 +51,8 @@ function ManagerRoutes() {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/issue-list" element={<IssueList />} />
           {/*--------------------------Team------------------------------------------------*/}
-          <Route path="/team" element={<Team />} />
+          <Route path="/team" element={<Team />}></Route>
+          <Route path="/team/:id" element={<Member />} />
           {/*--------------------------Charts------------------------------------------------*/}
           <Route path="/bar" element={<Bar />} />
           <Route path="/pie" element={<Pie />} />

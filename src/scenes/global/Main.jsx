@@ -12,6 +12,8 @@ import { Button } from '@mui/material';
 import { Suspense } from 'react';
 import NoAuthMain from './NoAuthMain';
 import AllRoutes from '../../routes/AllRoutes';
+import SignInPage from '../Auth/SignInPage';
+import { getTeamData } from '../../redux/taem/teamOperations';
 
 function Main() {
   const dispatch = useDispatch();
@@ -21,7 +23,9 @@ function Main() {
 
   useEffect(() => {
     dispatch(authOperations.getUser()).then(
-      !isUserLoggedIn ? redirect('log-in') : redirect('/dashboard'),
+      !isUserLoggedIn
+        ? redirect('log-in')
+        : redirect('/dashboard') && dispatch(getTeamData()),
     );
   }, [dispatch, isUserLoggedIn]);
 

@@ -7,7 +7,7 @@ import {
   MenuItem,
   InputLabel,
   ListSubheader,
-	useTheme,
+  useTheme,
 } from '@mui/material';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -17,39 +17,30 @@ import FileUploader from '../../../components/FileUploader';
 import { useState } from 'react';
 import { tokens } from '../../../theme';
 
-
-
 const AddIssue = () => {
   const isNonMobile = useMediaQuery('(min-width:600px)');
-	const theme = useTheme();
-	const colors = tokens(theme.palette.mode);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
+  const [file, setfile] = useState('');
 
-	const [file, setfile] = useState('')
-
-
-	const handleFormSubmit = values => {
-    console.log(values);
+  const handleFormSubmit = values => {
+    //console.log(values);
   };
 
-	const handleFile = (file) =>{
-		setfile(file)
-		console.log('file', file)
-	}
+  const handleFile = file => {
+    setfile(file);
+    //console.log('file', file)
+  };
 
-
-
-	const initialValues = {
-		firstName: '',
-		lastName: '',
-		district: '',
-		header: '',
-		description: '',
-		comment: '',
-	};
-	
-
-
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    district: '',
+    header: '',
+    description: '',
+    comment: '',
+  };
 
   return (
     <Box m="20px">
@@ -78,7 +69,7 @@ const AddIssue = () => {
                 '& > div': { gridColumn: isNonMobile ? undefined : 'span 4' },
               }}
             >
-							<TextField
+              <TextField
                 fullWidth
                 variant="filled"
                 type="text"
@@ -130,7 +121,7 @@ const AddIssue = () => {
                 helperText={touched.lastName && errors.lastName}
                 sx={{ gridColumn: 'span 2' }}
               />
-							<TextField
+              <TextField
                 fullWidth
                 variant="filled"
                 type="text"
@@ -148,7 +139,9 @@ const AddIssue = () => {
                   District
                 </InputLabel>
                 <Select
-									onChange={handleChange} defaultValue={''} name='district'
+                  onChange={handleChange}
+                  defaultValue={''}
+                  name="district"
                   native
                   id="grouped-native-select"
                   label="District"
@@ -166,26 +159,38 @@ const AddIssue = () => {
               </FormControl>
               <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel htmlFor="grouped-select">Work Place</InputLabel>
-                <Select onChange={handleChange} defaultValue={''} name='place' id="grouped-select" label="Work Place">
+                <Select
+                  onChange={handleChange}
+                  defaultValue={''}
+                  name="place"
+                  id="grouped-select"
+                  label="Work Place"
+                >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
                   <ListSubheader>Q3</ListSubheader>
-                    <MenuItem value={'FD LH'}>FD LH</MenuItem>
-                    <MenuItem value={'FD RH'}>FD RH</MenuItem>
-                    <MenuItem value={'RD LH'}>RD LH</MenuItem>
-                    <MenuItem value={'RD RH'}>RD RH</MenuItem>
+                  <MenuItem value={'FD LH'}>FD LH</MenuItem>
+                  <MenuItem value={'FD RH'}>FD RH</MenuItem>
+                  <MenuItem value={'RD LH'}>RD LH</MenuItem>
+                  <MenuItem value={'RD RH'}>RD RH</MenuItem>
                   <ListSubheader>Q4</ListSubheader>
-										<MenuItem value={'FD LH'}>FD LH</MenuItem>
-                    <MenuItem value={'FD RH'}>FD RH</MenuItem>
-                    <MenuItem value={'RD LH'}>RD LH</MenuItem>
-                    <MenuItem value={'RD RH'}>RD RH</MenuItem>
+                  <MenuItem value={'FD LH'}>FD LH</MenuItem>
+                  <MenuItem value={'FD RH'}>FD RH</MenuItem>
+                  <MenuItem value={'RD LH'}>RD LH</MenuItem>
+                  <MenuItem value={'RD RH'}>RD RH</MenuItem>
                 </Select>
               </FormControl>
 
               <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel  htmlFor="grouped-select">Priority</InputLabel>
-                <Select onChange={handleChange} defaultValue={''} name='priority' id="grouped-select" label="priority">
+                <InputLabel htmlFor="grouped-select">Priority</InputLabel>
+                <Select
+                  onChange={handleChange}
+                  defaultValue={''}
+                  name="priority"
+                  id="grouped-select"
+                  label="priority"
+                >
                   <MenuItem value={'Low'}>Low</MenuItem>
                   <MenuItem value={'Medium'}>Medium</MenuItem>
                   <MenuItem value={'Major'}>Major</MenuItem>
@@ -193,9 +198,7 @@ const AddIssue = () => {
                 </Select>
               </FormControl>
 
-							<FileUploader handleFile={handleFile}/>
-
-              
+              <FileUploader handleFile={handleFile} />
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
@@ -205,8 +208,8 @@ const AddIssue = () => {
           </form>
         )}
       </Formik>
-			
-			{/*{header && 
+
+      {/*{header && 
 				<Box m="20px">
 					<Typography
         variant="h2"

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { authSelector } from '../redux/auth';
 
 function FormModal({ body, handleClose, open }) {
-  const role = useSelector(authSelector.userRole);
+  const displayName = useSelector(authSelector.userName);
   return (
     <>
       <Modal
@@ -27,7 +27,7 @@ function FormModal({ body, handleClose, open }) {
           >
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                Role : {role}
+                Name : {displayName}
               </Typography>
             </CardContent>
           </Card>

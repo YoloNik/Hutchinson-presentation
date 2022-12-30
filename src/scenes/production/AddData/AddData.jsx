@@ -18,48 +18,71 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProdData } from '../../../redux/departmetn/departmentOperations';
 import { userName } from '../../../redux/auth/authSelector';
 import { toast } from 'react-toastify';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { addDataForEmployee } from '../../../redux/taem/teamOperations';
+import { employeeAllData } from '../../../redux/taem/teamSelector';
 
 const AddData = () => {
   const isNonMobile = useMediaQuery('(min-width:600px)');
   const currentUser = useSelector(userName);
+  const teamMembers = useSelector(employeeAllData);
   const dispatch = useDispatch();
+  const currentDate = new Date().toLocaleString();
+  //console.log('teamMembers', teamMembers);
 
-  const handleFormSubmit = values => {
-    dispatch(addProdData(values));
-    toast.success('Data is succeeded added. Thank you');
+  const getShift = () => {
+    const time = new Date().getHours() + new Date().getMinutes() / 60;
+    if (time >= 5.75 && time < 13.75) {
+      return 1;
+    } else if (time >= 13.75 && time < 21.75) {
+      return 2;
+    } else if (time >= 21.75 || time < 5.75) {
+      return 3;
+    }
   };
 
-  const currenDate = new Date().toLocaleString();
-  const day = currenDate.split('').slice(0, 10);
-  const time = currenDate.split('').slice(12);
+  const handleFormSubmit = values => {
+    //console.log('values', values);
+    dispatch(addProdData(values));
+    dispatch(addDataForEmployee(values));
+    toast.success('Data is successfully added. Thank you');
+  };
 
   const initialValues = {
     name: currentUser,
-    time: currenDate,
+    time: currentDate,
+    shift: getShift(),
     department: '',
     project: '',
-    side: '',
     type: '',
+    process: '',
+    workPlace: '',
+    employeeId: '',
     ok: '',
     nok: '',
     rework: '',
-    test: '',
 
+    //side: '',
+    //test: '',
     //leaderComment: '',
     //operatorComment: '',
   };
   const checkoutSchema = yup.object().shape({
     name: yup.string(),
     time: yup.string(),
+    shift: yup.number(),
     department: yup.string(),
     project: yup.string(),
-    side: yup.string(),
     type: yup.string(),
-    header: yup.string(),
+    process: yup.string(),
+    workPlace: yup.string(),
+    employeeId: yup.string(),
     ok: yup.number().min(0).required(),
     nok: yup.number().min(0).required(),
     rework: yup.number().min(0).required(),
-    test: yup.string(),
+
+    //side: yup.string(),
     //leaderComment: yup.string(),
     //operatorComment: yup.string(),
   });
@@ -92,7 +115,7 @@ const AddData = () => {
               gridTemplateColumns="repeat(6, minmax(0, 1fr))"
               sx={{
                 '& > div': {
-                  gridColumn: isNonMobile ? undefined : 'span 4',
+                  gridColumn: isNonMobile ? undefined : 'span 6',
                 },
               }}
             >
@@ -120,15 +143,14 @@ const AddData = () => {
                 label="Time"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={currenDate}
-                //defaultValue={currenDate}
+                value={currentDate}
+                //defaultValue={currentDate}
                 name="time"
                 error={!!touched.time && !!errors.time}
                 helperText={touched.time && errors.time}
                 sx={{ gridColumn: 'span 3' }}
               />
               {/* department-------------------------------------------------------- */}
-
               <FormControl
                 sx={{
                   m: 1,
@@ -148,50 +170,10 @@ const AddData = () => {
                   value={values.department}
                 >
                   <option value="" aria-label="None" />
-                  <optgroup label="Audi">
-                    <option value={'02c10'}>02c10</option>
-                    <option value={'02c34'}>02c34</option>
-                  </optgroup>
+                  <option value={'02c10'}>02c10</option>
+                  <option value={'02c34'}>02c34</option>
                 </Select>
               </FormControl>
-
-              <FormControl
-                sx={{
-                  m: 1,
-                  minWidth: 120,
-                  gridColumn: 'span 3',
-                }}
-              >
-                <InputLabel htmlFor="grouped-native-department">
-                  Test
-                </InputLabel>
-                <Select
-                  native
-                  id="grouped-native-department"
-                  label="Department"
-                  name="department"
-                  onChange={handleChange}
-                  value={values.department}
-                >
-                  <option value="" aria-label="None" />
-                  <optgroup>
-                    <option value={'Form FD RH'}>Form FD RH</option>
-                    <option value={'Form FD LH'}>Form FD LH</option>
-                    <option value={'Form RD RH'}>Form RD RH</option>
-                    <option value={'Form RD LH'}>Form RD LH</option>
-                    <option value={'Czysz FD RH'}>Czysz FD RH</option>
-                    <option value={'Czysz FD LH'}>Czysz FD LH</option>
-                    <option value={'Czysz RD RH'}>Czysz RD RH</option>
-                    <option value={'Czysz RD LH'}>Czysz RD LH</option>
-                    <option value={'Form M61'}>Form M61</option>
-                    <option value={'Form OWS'}>Form OWS</option>
-                    <option value={'Ciecie FD'}>Ciecie FD</option>
-                    <option value={'Ciecie RD'}>Ciecie RD</option>
-                    <option value={'Transfer'}>Transfer</option>
-                  </optgroup>
-                </Select>
-              </FormControl>
-
               {/* Project-------------------------------------------------------- */}
               {values.department ? (
                 <FormControl sx={{ m: 1, minWidth: 120, gridColumn: 'span 3' }}>
@@ -248,11 +230,8 @@ const AddData = () => {
                     value={values.type}
                   >
                     <option value="" aria-label="None" />
-                    <optgroup label="Type">
-                      {/*<option value={'cleaning'}>Cleaning</option>*/}
-                      <option value={'RD'}>RD</option>
-                      <option value={'FD'}>FD</option>
-                    </optgroup>
+                    <option value={'black'}>Black</option>
+                    <option value={'chrom'}>Chrom</option>
                   </Select>
                 </FormControl>
               ) : (
@@ -265,30 +244,29 @@ const AddData = () => {
                     gridColumn: 'span 3',
                   }}
                 >
-                  <InputLabel htmlFor="grouped-select-type">
-                    Work Place
-                  </InputLabel>
+                  <InputLabel htmlFor="grouped-select-type">Type</InputLabel>
                   <Select value="" name="type" />
                 </FormControl>
               )}
-
-              {/* Side-------------------------------------------------------- */}
+              {/* Process-------------------------------------------------------- */}
               {values.department && values.project && values.type ? (
                 <FormControl sx={{ m: 1, minWidth: 120, gridColumn: 'span 3' }}>
-                  <InputLabel htmlFor="grouped-select-side">Side</InputLabel>
+                  <InputLabel htmlFor="grouped-select-process">
+                    Process
+                  </InputLabel>
                   <Select
                     native
-                    id="grouped-select-side"
-                    label="Side"
-                    name="side"
+                    id="grouped-select-process"
+                    label="Process"
+                    name="process"
                     onChange={handleChange}
-                    value={values.side}
+                    value={values.process}
                   >
                     <option value="" aria-label="None" />
-                    <optgroup label="Side">
-                      <option value={'LH'}>LH</option>
-                      <option value={'RH'}>RH</option>
-                    </optgroup>
+                    <option value={'transfer'}>Transfer</option>
+                    <option value={'cuting'}>Cuting</option>
+                    <option value={'forming'}>Forming</option>
+                    <option value={'cleaning'}>Cleaning</option>
                   </Select>
                 </FormControl>
               ) : (
@@ -301,15 +279,204 @@ const AddData = () => {
                     gridColumn: 'span 3',
                   }}
                 >
-                  <InputLabel htmlFor="grouped-select-side">Side</InputLabel>
-                  <Select value="" name="side" />
+                  <InputLabel htmlFor="grouped-select-process">
+                    Process
+                  </InputLabel>
+                  <Select value="" name="process" />
+                </FormControl>
+              )}
+              {/* Work Place-------------------------------------------------------- */}
+              {values.department &&
+              values.project &&
+              values.type &&
+              values.process ? (
+                //transfer----------------------------------------------------------------
+                values.process === 'transfer' && (
+                  <FormControl
+                    sx={{ m: 1, minWidth: 120, gridColumn: 'span 3' }}
+                  >
+                    <InputLabel htmlFor="grouped-select-workPlace">
+                      Work Place
+                    </InputLabel>
+                    <Select
+                      native
+                      id="grouped-select-workPlace"
+                      label="Work Place"
+                      name="workPlace"
+                      onChange={handleChange}
+                      value={values.workPlace}
+                    >
+                      {values.type === 'black' ? (
+                        <>
+                          <option value="" aria-label="None" />
+                          <option value={'FD P5'}>FD P5</option>
+                          <option value={'RD P5'}>RD P5</option>
+                          <option value={'OWS'}>OWS</option>
+                        </>
+                      ) : (
+                        <>
+                          <option value="" aria-label="None" />
+                          <option value={'FD P1'}>FD P1</option>
+                          <option value={'RD P1'}>RD P1</option>
+                        </>
+                      )}
+                    </Select>
+                  </FormControl>
+                )
+              ) : (
+                <FormControl
+                  disabled
+                  sx={{
+                    m: 1,
+                    minWidth: 120,
+                    opacity: 0.3,
+                    gridColumn: 'span 3',
+                  }}
+                >
+                  <InputLabel htmlFor="grouped-select-workPlace">
+                    Work Place
+                  </InputLabel>
+                  <Select value="" name="workPlace" />
+                </FormControl>
+              )}
+              {/*cuting------------------------------------------------------*/}
+              {values.process === 'cuting' && (
+                <FormControl sx={{ m: 1, minWidth: 120, gridColumn: 'span 3' }}>
+                  <InputLabel htmlFor="grouped-select-workPlace">
+                    Work Place
+                  </InputLabel>
+                  <Select
+                    native
+                    id="grouped-select-workPlace"
+                    label="Work Place"
+                    name="workPlace"
+                    onChange={handleChange}
+                    value={values.workPlace}
+                  >
+                    <option value="" aria-label="None" />
+                    <option value={'FD'}>FD</option>
+                    <option value={'RD'}>RD</option>
+                  </Select>
+                </FormControl>
+              )}
+              {/*forming------------------------------------------------------*/}
+              {values.process === 'forming' && (
+                <FormControl sx={{ m: 1, minWidth: 120, gridColumn: 'span 3' }}>
+                  <InputLabel htmlFor="grouped-select-workPlace">
+                    Work Place
+                  </InputLabel>
+                  <Select
+                    native
+                    id="grouped-select-workPlace"
+                    label="Work Place"
+                    name="workPlace"
+                    onChange={handleChange}
+                    value={values.workPlace}
+                  >
+                    {values.type === 'black' ? (
+                      <>
+                        <option value="" aria-label="None" />
+                        <option value={'FD LH'}>FD LH</option>
+                        <option value={'FD RH'}>FD LH</option>
+                        <option value={'RD LH'}>RD RH</option>
+                        <option value={'RD RH'}>RD RH</option>
+                        <option value={'M1'}>M1</option>
+                        <option value={'M6'}>M6</option>
+                        <option value={'OWS'}>OWS</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="" aria-label="None" />
+                        <option value={'FD LH'}>FD LH</option>
+                        <option value={'FD RH'}>FD LH</option>
+                        <option value={'RD LH'}>RD RH</option>
+                        <option value={'RD RH'}>RD RH</option>
+                        <option value={'M1'}>M1</option>
+                        <option value={'M6'}>M6</option>
+                      </>
+                    )}
+                  </Select>
+                </FormControl>
+              )}
+              {/*Cleaning----------------------------------------------------------------*/}
+              {values.process === 'cleaning' && (
+                <FormControl sx={{ m: 1, minWidth: 120, gridColumn: 'span 3' }}>
+                  <InputLabel htmlFor="grouped-select-workPlace">
+                    Work Place
+                  </InputLabel>
+                  <Select
+                    native
+                    id="grouped-select-workPlace"
+                    label="Work Place"
+                    name="workPlace"
+                    onChange={handleChange}
+                    value={values.workPlace}
+                  >
+                    <option value="" aria-label="None" />
+                    <option value={'FD LH'}>FD LH</option>
+                    <option value={'FD RH'}>FD RH</option>
+                    <option value={'RD LH'}>RD LH</option>
+                    <option value={'RD RH'}>RD RH</option>
+                  </Select>
+                </FormControl>
+              )}
+              {/*Employee---------------------------------------------------------*/}
+              {values.department &&
+              values.project &&
+              values.type &&
+              values.process &&
+              values.workPlace ? (
+                <FormControl
+                  sx={{
+                    m: 1,
+                    minWidth: 120,
+                    gridColumn: 'span 3',
+                  }}
+                >
+                  <InputLabel htmlFor="grouped-native-employeeId">
+                    Employee
+                  </InputLabel>
+                  <Select
+                    native
+                    id="grouped-native-employeeId"
+                    label="Employee"
+                    name="employeeId"
+                    onChange={handleChange}
+                    value={values.employeeId}
+                  >
+                    <option value="" aria-label="None" />
+                    {teamMembers.map(
+                      member =>
+                        member.process === values.process && (
+                          <option key={member.id} value={member.id}>
+                            {member.name}
+                          </option>
+                        ),
+                    )}
+                  </Select>
+                </FormControl>
+              ) : (
+                <FormControl
+                  disabled
+                  sx={{
+                    m: 1,
+                    minWidth: 120,
+                    opacity: 0.3,
+                    gridColumn: 'span 3',
+                  }}
+                >
+                  <InputLabel htmlFor="grouped-select-employeeId">
+                    Employee
+                  </InputLabel>
+                  <Select value="" name="employeeId" />
                 </FormControl>
               )}
               {/* ok-------------------------------------------------------- */}
               {values.department &&
               values.project &&
               values.type &&
-              values.side ? (
+              values.process &&
+              values.workPlace ? (
                 <>
                   <TextField
                     fullWidth

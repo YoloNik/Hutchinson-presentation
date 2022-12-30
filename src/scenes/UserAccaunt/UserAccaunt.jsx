@@ -13,10 +13,11 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectRole } from '../../redux/auth/authOperations';
+import { changeDisplayName } from '../../redux/auth/authOperations';
 import FormModal from '../../components/Modal';
 import { Formik } from 'formik';
 import { authOperations, authSelector } from '../../redux/auth';
+import * as yup from 'yup';
 
 function UserAccaunt() {
   const dispatch = useDispatch();
@@ -26,12 +27,12 @@ function UserAccaunt() {
   const isNonMobile = useMediaQuery('(min-width:600px)');
   const name = useSelector(authSelector.userName);
 
-  const role = () => {
-    //selectRole;
+  const displayName = () => {
+    //changeDisplayName;
   };
   const handleFormSubmit = value => {
-    console.log('value', value);
-    dispatch(selectRole(value));
+    //console.log('value', value);
+    dispatch(changeDisplayName(value));
   };
 
   return (
@@ -40,8 +41,10 @@ function UserAccaunt() {
 
       <Formik
         onSubmit={handleFormSubmit}
-        initialValues={{ role: '' }}
-        //validationSchema={checkoutSchema}
+        initialValues={{ displayName: '' }}
+        validationSchema={yup
+          .object()
+          .shape({ displayName: yup.string().min(2).required() })}
       >
         {({
           values,
@@ -61,20 +64,20 @@ function UserAccaunt() {
                 '& > div': { gridColumn: isNonMobile ? undefined : 'span 4' },
               }}
             >
-              <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel htmlFor="grouped-select">Role</InputLabel>
-                <Select
-                  onChange={handleChange}
-                  defaultValue={''}
-                  name="role"
-                  id="grouped-select"
-                  label="role"
-                >
-                  <MenuItem value={'Manager'}>Manager</MenuItem>
-                  <MenuItem value={'Leader'}>Leader</MenuItem>
-                  <MenuItem value={'employee '}>employee </MenuItem>
-                </Select>
-              </FormControl>
+              <TextField
+                fullWidth
+                disabled
+                variant="filled"
+                type="text"
+                label="Display Name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.displayName}
+                name="displayName"
+                error={!!touched.displayName && !!errors.displayName}
+                helperText={touched.displayName && errors.displayName}
+                sx={{ gridColumn: 'span 3' }}
+              />
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">

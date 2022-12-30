@@ -27,7 +27,7 @@ const BarChart = ({ isDashboard = false }) => {
   const [data, setData] = useState(mockBarDataYear);
 
   const handleChange = e => {
-    console.log('e.target', e.target);
+    //console.log('e.target', e.target);
     switch (e.target.value) {
       case 'Year':
         setData(mockBarDataYear);
@@ -249,7 +249,7 @@ const BarChart = ({ isDashboard = false }) => {
             ],
           },
         ]}
-        role="application"
+        displayName="application"
         ariaLabel="Nivo bar chart demo"
         barAriaLabel={function (e) {
           return (

@@ -49,7 +49,6 @@ const ManagerSidebar = ({ isCollapsed, setIsCollapsed }) => {
   const isUserLogIn = useSelector(authSelector.isUserLogin);
   const name = useSelector(authSelector.userName);
   const photoURL = useSelector(authSelector.userPhotoURL);
-  const role = useSelector(authSelector.userRole);
   const mail = useSelector(authSelector.userEmail);
   const emailTest = ['manager@mail.com', 'nikitaslipachuk@gmail.com'];
   const access = emailTest.includes(mail);
@@ -57,7 +56,7 @@ const ManagerSidebar = ({ isCollapsed, setIsCollapsed }) => {
 
   return (
     <>
-      {mail && (
+      {isUserLogIn && (
         <Box
           style={{ minHeight: '100vh' }}
           sx={{
@@ -141,7 +140,7 @@ const ManagerSidebar = ({ isCollapsed, setIsCollapsed }) => {
                       {name}
                     </Typography>
                     <Typography variant="h5" color={colors.greenAccent[500]}>
-                      {role}
+                      {/*{displayName}*/}
                     </Typography>
                   </Box>
                 </Box>
