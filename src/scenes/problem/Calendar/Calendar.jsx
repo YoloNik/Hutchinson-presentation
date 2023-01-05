@@ -47,7 +47,7 @@ const Calendar = () => {
     }
   };
 
-  const time = new Date()(formatDate(time));
+  //const time = new Date()(formatDate(time));
   const calendarData = [
     {
       id: '1',

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
   Box,
   Button,
@@ -13,6 +13,9 @@ import {
   TextareaAutosize,
   IconButton,
   Icon,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
 } from '@mui/material';
 //import Textarea from '@mui/joy/Textarea';
 import MyResponsiveRadar from '../../components/Radar';
@@ -37,9 +40,11 @@ import { useMediaQuery } from '@mui/material';
 import { toast } from 'react-toastify';
 import { GridToolbar } from '@mui/x-data-grid';
 import CreateMemberImg from './CreateMemberImg';
+import { allProdData } from '../../redux/departmetn/departmentSelector';
+import { getProdData } from '../../redux/departmetn/departmentOperations';
 
 function Member({ isOpen, handleModal, employee }) {
-  const [isChildOpen, setIsChildOpen] = React.useState(false);
+  const [isChildOpen, setIsChildOpen] = useState(false);
   const isNonMobile = useMediaQuery('(min-width:600px)');
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -49,11 +54,40 @@ function Member({ isOpen, handleModal, employee }) {
   const navigateTo = useNavigate();
   const currentEmployee = test.find(el => location.state.id === el.id);
 
+  const [data, setData] = useState();
+
+  const handleChange = e => {
+    //console.log('e.target', e.target)
+    switch (e.target.value) {
+      case 'Year':
+        setData();
+        break;
+      case 'Month':
+        setData();
+        break;
+      case 'Week':
+        setData();
+        break;
+      case 'Day':
+        setData();
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  //console.log('getAllProdData', getProdDataForEmployee);
+
   //console.log('location', navigate);
   //const currentProdData =
   useEffect(() => {
+    dispatch(getProdData());
     dispatch(getTeamData());
   }, [dispatch]);
+
+  const getProdDataForEmployee = useSelector(allProdData).map(el => [el]);
+  //console.log('currentEmployee', currentEmployee);
 
   const handleChildModal = () => {
     setIsChildOpen(prev => !prev);
@@ -62,6 +96,7 @@ function Member({ isOpen, handleModal, employee }) {
     setIsChildOpen(true);
   };
   const removeTeamMember = () => {
+    //console.log('first', currentEmployee);
     dispatch(deleteTeamData(currentEmployee.id));
     navigateTo('/team');
   };
@@ -75,9 +110,21 @@ function Member({ isOpen, handleModal, employee }) {
 
   const columns = [
     {
+      field: 'time',
+      headerName: 'Time',
+      flex: 1.5,
+      //cellClassName: 'name-column--cell',
+    },
+    {
+      field: 'shift',
+      headerName: 'Shift',
+      flex: 0.5,
+      //cellClassName: 'name-column--cell',
+    },
+    {
       field: 'department',
       headerName: 'Department',
-      flex: 1.5,
+      flex: 1,
       //cellClassName: 'name-column--cell',
     },
     {
@@ -88,8 +135,8 @@ function Member({ isOpen, handleModal, employee }) {
       flex: 1,
     },
     {
-      field: 'side',
-      headerName: 'Side',
+      field: 'process',
+      headerName: 'Process',
       flex: 1,
     },
     {
@@ -97,26 +144,21 @@ function Member({ isOpen, handleModal, employee }) {
       headerName: 'Type',
       flex: 1,
     },
-    {
-      field: 'time',
-      headerName: 'Time',
-      flex: 1,
-      //cellClassName: 'name-column--cell',
-    },
+
     {
       field: 'ok',
       headerName: 'Ok',
-      flex: 1,
+      flex: 0.5,
     },
     {
       field: 'nok',
       headerName: 'Nok',
-      flex: 1,
+      flex: 0.5,
     },
     {
       field: 'rework',
       headerName: 'Rework',
-      flex: 1,
+      flex: 0.5,
     },
   ];
 
@@ -252,6 +294,7 @@ function Member({ isOpen, handleModal, employee }) {
         </div>
         <Box
           //sx={{ background: colors.primary[400] }}
+
           gridColumn="span 2"
           sx={{
             '& .MuiDataGrid-root': {
@@ -282,8 +325,81 @@ function Member({ isOpen, handleModal, employee }) {
             },
           }}
         >
+          <FormControl
+            fullWidth
+            sx={{
+              height: '8%',
+              //marginTop: '20px',
+              //marginLeft: '20px',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              alignItems: 'center',
+              //alignItems:'space'
+            }}
+          >
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+              onChange={handleChange}
+              defaultValue="Day"
+            >
+              <FormControlLabel
+                value="Year"
+                label="Year"
+                control={
+                  <Radio
+                    sx={{
+                      color: colors.greenAccent[400],
+                      '&.Mui-checked': { color: colors.blueAccent[600] },
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                value="Month"
+                label="Month"
+                control={
+                  <Radio
+                    sx={{
+                      color: colors.greenAccent[400],
+                      '&.Mui-checked': { color: colors.blueAccent[600] },
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                value="Week"
+                label="Week"
+                control={
+                  <Radio
+                    sx={{
+                      color: colors.greenAccent[400],
+                      '&.Mui-checked': { color: colors.blueAccent[600] },
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                value="Day"
+                label="Day"
+                control={
+                  <Radio
+                    sx={{
+                      color: colors.greenAccent[400],
+                      '&.Mui-checked': { color: colors.blueAccent[600] },
+                    }}
+                  />
+                }
+              />
+            </RadioGroup>
+          </FormControl>
           <DataGrid
-            rows={[]}
+            sx={{ maxHeight: '92%' }}
+            density="compact"
+            initialState={{ 1: { time: 1 }, 2: { time: 2 } }}
+            rows={currentEmployee.prodData}
+            getRowId={row => row.time}
             columns={columns}
             components={{ Toolbar: GridToolbar }}
           />
@@ -330,7 +446,7 @@ function Member({ isOpen, handleModal, employee }) {
             gridColumn: 'span 3',
           }}
         >
-          {currentEmployee?.comment?.map((el, idx) => (
+          {currentEmployee?.comments?.map((el, idx) => (
             <li key={idx} style={{ margin: '10px' }} id="parent-modal-comment">
               <p
                 style={{
@@ -395,17 +511,18 @@ function ChildModal({ open, handleChildModal, currentEmployee }) {
   };
 
   const initialValues = {
-    comment: [],
+    [currentUser]: '',
   };
 
   const addComent = values => {
     const newComment = {
-      ...currentEmployee,
-      comment: [{ [currentUser]: values.comment }, ...currentEmployee.comment],
+      values,
+      currentEmployee,
     };
-    //console.log('values', newComment);
+    //console.log('newComment', newComment);
     handleChildModal();
     dispatch(addCommentForEmployee(newComment));
+    //console.log('new', values);
     //dispatch(getSingleEmployee)
   };
 
@@ -481,8 +598,8 @@ function ChildModal({ open, handleChildModal, currentEmployee }) {
                 label="Comment"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.comment}
-                name="comment"
+                value={values.currentUser}
+                name={currentUser}
               />
               <div style={{ display: 'flex', gap: '25px' }}>
                 <Button

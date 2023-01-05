@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getTeamData, addDataForEmployee } from './teamOperations';
+import {
+  getTeamData,
+  addDataForEmployee,
+  deleteTeamData,
+} from './teamOperations';
 
 const initialState = {
   employee: [],
@@ -31,7 +35,7 @@ export const teamSlice = createSlice({
       })
       .addCase(getTeamData.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.employee = payload.map(el => el);
+        state.employee = payload;
       })
       .addCase(getTeamData.rejected, (state, { payload }) => {
         state.loading = false;
@@ -43,10 +47,23 @@ export const teamSlice = createSlice({
       })
       .addCase(addDataForEmployee.fulfilled, (state, { payload }) => {
         state.loading = false;
-        console.log('first', payload);
+        //console.log('first', payload);
         //state.employee = payload.map(el => el);
       })
       .addCase(addDataForEmployee.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(deleteTeamData.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteTeamData.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        //console.log('first', payload);
+        //state.employee = payload.map(el => el);
+      })
+      .addCase(deleteTeamData.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });

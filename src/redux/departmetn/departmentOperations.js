@@ -23,6 +23,24 @@ const getProdData = createAsyncThunk(
     return test1;
   },
 );
+//const getEmploYeeProdData = createAsyncThunk(
+//  'department/getEmploYeeProdData',
+//  async (_, { getState }) => {
+//    const { data } = await axios.get(
+//      `${BASE_URL}/prodData.json?auth=${DATA_SEACRET}`,
+//    );
+//    const test1 = [];
+//    const test = Object.values(data)
+//      .flat()
+//      .map(el => Object.values(el).map(el => test1.push(el)));
+//    test1.map((el, idx) => (el.id = idx));
+//    //const allProdinOneArray = { ...allProdArray };
+//    //console.log('allProdinOneArray', allProdArray);
+//    //return allProdArray;
+//    //console.log('test1', test1);
+//    return test1;
+//  },
+//);
 
 const addProdData = createAsyncThunk(
   'department/addProdData',

@@ -19,7 +19,7 @@ import {
 const BarChartStacked = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [data, setData] = useState(mockBarDataStackedYear);
+  const [data, setData] = useState(mockBarDataStackedDay);
 
   const handleChange = e => {
     switch (e.target.value) {
@@ -49,6 +49,7 @@ const BarChartStacked = ({ isDashboard = false }) => {
         sx={{ marginTop: '20px', marginLeft: '20px', marginBottom: '-40px' }}
       >
         <RadioGroup
+          defaultValue="Day"
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"

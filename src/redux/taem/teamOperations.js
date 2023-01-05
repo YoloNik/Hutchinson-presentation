@@ -1,6 +1,8 @@
+import { Construction } from '@mui/icons-material';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 const BASE_URL = process.env.REACT_APP_FIREBASEDATA_URL;
 //const API_KEY = process.env.REACT_APP_FIREBASE_APIKEY;
@@ -10,27 +12,48 @@ const moco_url = 'https://639cf32d16d1763ab15723af.mockapi.io';
 const getTeamData = createAsyncThunk(
   'team/getTeamData',
   async (_, { getState, rejectWithValue }) => {
-    const { data } = await axios.get(
-      `${BASE_URL}/team.json?auth=${DATA_SEACRET}`,
-    );
-    const result = [];
+    try {
+      const { data } = await axios.get(
+        `${BASE_URL}/team.json?auth=${DATA_SEACRET}`,
+      );
 
-    Object.values(data)
-      .flat()
-      .map(el => Object.values(el).map(el => result.push(el)));
-    result.map((el, idx) => (el.id = idx));
+      const result = [];
 
-    return result;
+      Object.values(data).map((nestedObj, idx) => {
+        const comments = [];
+        const prodData = [];
+        for (let key in nestedObj.comments) {
+          comments.push(nestedObj.comments[key]);
+        }
+        for (let key in nestedObj.prodData) {
+          prodData.push(nestedObj.prodData[key]);
+        }
+        return result.push({
+          ...nestedObj,
+          id: Object.keys(data)[idx],
+          comments: comments,
+          prodData: prodData,
+        });
+      });
+
+      return result;
+    } catch (error) {
+      console.log('error', error);
+      return rejectWithValue(error.response.data.error.message);
+    }
   },
 );
 
 const addCommentForEmployee = createAsyncThunk(
   'team/addCommentForEmployee',
   async (body, { getState, dispatch }) => {
-    //const dispatch = useDispatch();
-    const data = await axios.put(`${moco_url}/employee/${body.id}`, {
-      ...body,
-    });
+    const data = await axios.post(
+      `${BASE_URL}/team/${body.currentEmployee.id}/comments.json?auth=${DATA_SEACRET}`,
+      {
+        ...body.values,
+      },
+    );
+
     dispatch(getTeamData());
     return data;
   },
@@ -38,23 +61,13 @@ const addCommentForEmployee = createAsyncThunk(
 const addDataForEmployee = createAsyncThunk(
   'team/addDataForEmployee',
   async (body, { getState, dispatch }) => {
-    //console.log('body', body);
-    //getState().team.employee.map(el => console.log('el', el));
-    const currentEmployee = getState().team.employee.filter(
-      el =>
-        body.department === el.department &&
-        body.process === el.process &&
-        body.project === el.project &&
-        body.employee === el.id,
+    const data = await axios.post(
+      `${BASE_URL}/team/${body.employeeId}/prodData.json?auth=${DATA_SEACRET}`,
+      {
+        ...body,
+      },
     );
-    console.log('body', body);
-    //console.log('currentEmployee', currentEmployee);
-    //const dispatch = useDispatch();
-    //const data = await axios.put(`${moco_url}/employee/${body.id}`, {
-    //  ...body,
-    //});
-    ////dispatch(getTeamData());
-    //return data;
+    return data;
   },
 );
 const addEmployee = createAsyncThunk(
@@ -62,7 +75,7 @@ const addEmployee = createAsyncThunk(
   async (body, { getState, dispatch }) => {
     const localId = getState().auth.localId;
     const data = await axios.post(
-      `${BASE_URL}/team/${localId}.json?auth=${DATA_SEACRET}`,
+      `${BASE_URL}/team.json?auth=${DATA_SEACRET}`,
       {
         ...body,
       },
@@ -74,12 +87,8 @@ const addEmployee = createAsyncThunk(
 const deleteTeamData = createAsyncThunk(
   'team/deleteTeamData',
   async (body, { getState, dispatch }) => {
-    const localId = getState().auth.localId;
-    const data = await axios.post(
-      `${BASE_URL}/team/${localId}.json?auth=${DATA_SEACRET}`,
-      {
-        ...body,
-      },
+    const data = await axios.delete(
+      `${BASE_URL}/team/${body}.json?auth=${DATA_SEACRET}`,
     );
     dispatch(getTeamData());
     return data;

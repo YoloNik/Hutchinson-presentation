@@ -24,7 +24,7 @@ const DATA_SEACRET = process.env.REACT_APP_FIREBASEDATA_SEACRET;
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [data, setData] = useState(mockBarDataYear);
+  const [data, setData] = useState(mockBarDataDay);
 
   const handleChange = e => {
     //console.log('e.target', e.target);
@@ -63,6 +63,7 @@ const BarChart = ({ isDashboard = false }) => {
         sx={{ marginTop: '20px', marginLeft: '20px', marginBottom: '-40px' }}
       >
         <RadioGroup
+          defaultValue="Day"
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"

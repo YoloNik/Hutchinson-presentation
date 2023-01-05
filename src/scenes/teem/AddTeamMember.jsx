@@ -77,10 +77,13 @@ export default function AddTeamMember({
   };
 
   const handleFormSubmit = values => {
-    const initials = values.name.charAt(0);
-    console.log('first', initials);
     const currentDate = new Date().toLocaleString();
-    const employee = { ...values, id: uuidv4(), createdAt: currentDate };
+    const employee = {
+      ...values,
+      //id: uuidv4(),
+      createdAt: currentDate,
+      comment: {},
+    };
     dispatch(addEmployee(employee));
     toast.success('Employee added');
     closeTeamMemberModal();
